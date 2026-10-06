@@ -1,0 +1,535 @@
+/* ============================================
+   UBC - UNIQUE BUILDING CONTRACTORS
+   Premium Clean Design System
+   ============================================ */
+
+:root {
+  /* Brand Colors (Updated Palette) */
+  --green-primary: #112033;
+  --green-light: #C19D63;
+  --green-dark: #0b1726;
+  --cream: #F6EEE2;
+  --terracotta: #C19D63;
+  --charcoal: #202a33;
+  --champagne: #C19D63;
+
+  /* Extremely Clean Gradients (Updated) */
+  --gradient-logo: linear-gradient(90deg, #112033 0%, #C19D63 48%, #112033 100%);
+  --gradient-title: linear-gradient(100deg, #112033 0%, #202a33 54%, #112033 100%);
+  --gradient-gold: linear-gradient(135deg, #C19D63 0%, #F6EEE2 100%);
+  --gradient-wood: linear-gradient(135deg, #F6EEE2 0%, #C19D63 50%, #112033 100%);
+  --wood-oak: #C19D63;
+  --wood-dark: #112033;
+  --gradient-light: linear-gradient(135deg, #F6EEE2 0%, #ffffff 100%);
+  --title-relief-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.88),
+    0 8px 18px rgba(17, 32, 51, 0.16),
+    0 22px 44px rgba(17, 32, 51, 0.16);
+
+  /* Text & Backgrounds - Clean & Premium */
+  --bg-white: #ffffff;
+  --bg-offwhite: #f7f5f0;
+  --bg-soft: #f7f5f0;
+
+  --text-dark: #323232;
+  --text-muted: #68717a;
+  --text-light: #a58558;
+
+  /* Typography */
+  --font-body: 'Montserrat', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-accent: 'Playfair Display', serif;
+
+  /* Spacing */
+  --section-pad: 112px;
+  --section-pad-sm: 72px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-med: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Borders */
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --shape-clip: none;
+  --shape-clip-tight: none;
+  --shape-clip-chip: none;
+
+  /* Premium Shadows */
+  --shadow-sm: 0 8px 24px rgba(17, 32, 51, 0.06);
+  --shadow-md: 0 16px 40px rgba(17, 32, 51, 0.09);
+  --shadow-lg: 0 24px 60px rgba(17, 32, 51, 0.12);
+  --shadow-green: 0 12px 30px rgba(17, 32, 51, 0.16);
+}
+
+/* ---- RESET ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-white);
+  color: var(--text-dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  position: relative;
+  overflow: hidden;
+}
+
+.app::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+  background: transparent;
+}
+
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green-primary);
+  border-radius: 4px;
+}
+
+/* ---- TYPOGRAPHY ---- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+}
+
+.display-text {
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  padding: 0;
+  border-radius: 0;
+  margin-bottom: 22px;
+  box-shadow: none;
+  clip-path: none;
+}
+
+.section-badge::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--green-light);
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.75rem);
+  font-weight: 500;
+  color: var(--green-dark);
+  line-height: 1.08;
+  margin-bottom: 20px;
+  letter-spacing: -0.025em;
+}
+
+.section-title span {
+  color: var(--green-light);
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  line-height: 1.8;
+}
+
+/* ---- BUTTONS ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px 28px;
+  border-radius: 2px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  transition: all var(--transition-med);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  isolation: isolate;
+  clip-path: none;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.42) 45%, transparent 72%);
+  transform: translateX(-120%);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.btn:hover::after {
+  transform: translateX(120%);
+}
+
+.btn-primary {
+  background: var(--green-primary);
+  color: white;
+  box-shadow: none;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-logo);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--transition-med);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: var(--green-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-terra {
+  background: var(--terracotta);
+  color: white;
+  box-shadow: 0 16px 42px rgba(184, 103, 62, 0.22);
+}
+
+.btn-terra:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 46px rgba(184, 103, 62, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--green-dark);
+  border: 1px solid rgba(17, 32, 51, 0.22);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--green-primary);
+  color: var(--green-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- CONTAINER ---- */
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ---- SECTION ---- */
+.section {
+  padding: var(--section-pad) 0;
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1180px, calc(100% - 48px));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(17, 32, 51, 0.1), transparent);
+}
+
+.section-dark {
+  background: var(--bg-offwhite);
+}
+
+.section-dark-800,
+.section-dark-700 {
+  background: var(--bg-white);
+  position: relative;
+}
+
+/* ---- GLASS CARD ---- */
+.glass-card {
+  background: var(--bg-white);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid rgba(17, 32, 51, 0.1);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-med);
+  position: relative;
+  overflow: hidden;
+  clip-path: none;
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: none;
+  opacity: 0;
+}
+
+.glass-card>* {
+  position: relative;
+  z-index: 1;
+}
+
+.glass-card:hover {
+  background: var(--bg-white);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--green-primary);
+}
+
+/* ---- GRID ---- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ---- UTILITIES ---- */
+.text-center {
+  text-align: center;
+}
+
+.text-green {
+  color: var(--green-primary);
+}
+
+.text-light {
+  color: var(--green-light);
+}
+
+.text-terra {
+  color: var(--terracotta);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.wood-texture {
+  background: var(--gradient-wood);
+  border: 1px solid var(--wood-dark);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.wood-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(90deg,
+      rgba(184, 166, 138, 0.05) 0px,
+      rgba(184, 166, 138, 0.05) 1px,
+      transparent 1px,
+      transparent 20px);
+  pointer-events: none;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-pad: 76px;
+    --section-pad-sm: 56px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 0 28px;
+  }
+
+  .section-title {
+    font-size: 2.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-pad: 60px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  ::selection {
+    background: rgba(193, 157, 99, 0.24);
+    color: var(--green-dark);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--green-light);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+  }
+}
+
+/* ============================================
+   SEO & ACCESSIBILITY — AOS Crawler Fix
+   AOS hides elements with opacity:0 until
+   they scroll into view. Search engine bots
+   don't scroll, so we force all AOS elements
+   visible when the user prefers reduced motion
+   (which most screen readers and crawlers
+   trigger) and via a dedicated bot-safe rule.
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos],
+  [data-aos].aos-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Ensure AOS elements are never hidden from the accessibility tree */
+[data-aos][aria-hidden="false"] {
+  opacity: 1 !important;
+}
+
+/* ---- LOADERS ---- */
+.page-loader,
+.section-loader {
+  min-height: 40px;
+}

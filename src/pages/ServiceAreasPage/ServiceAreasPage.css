@@ -1,0 +1,445 @@
+/* ── SERVICE AREAS HUB PAGE ───────────────────────────────────── */
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.sa-hero {
+  background: var(--bg-offwhite);
+  padding-top: 120px;
+}
+
+.sa-hero-content {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 64px;
+  align-items: start;
+}
+
+.sa-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.sa-breadcrumb a {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.sa-breadcrumb a:hover {
+  color: var(--green-primary);
+}
+
+.sa-h1 {
+  font-size: 3rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  color: var(--text-dark);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.sa-h1 span {
+  background: var(--gradient-title);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sa-hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+
+.sa-hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Map card */
+.sa-hero-map {
+  padding: 28px;
+  position: sticky;
+  top: 100px;
+}
+
+.sa-map-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(191, 222, 123, 0.3);
+}
+
+.sa-map-cities {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.sa-map-city-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.sa-map-city-link:hover {
+  background: rgba(191, 222, 123, 0.1);
+  color: var(--green-dark);
+}
+
+.sa-map-city-link svg:first-child {
+  color: var(--green-primary);
+  flex-shrink: 0;
+}
+
+.sa-map-arrow {
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  color: var(--green-primary);
+}
+
+.sa-map-city-link:hover .sa-map-arrow {
+  opacity: 1;
+}
+
+.sa-map-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ── TRUST BAR ────────────────────────────────────────────────── */
+.sa-trust-section {
+  background: var(--bg-white);
+  padding: 32px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.sa-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.sa-trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.sa-trust-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 3px;
+}
+
+.sa-trust-detail {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* ── SECTION HEADER ───────────────────────────────────────────── */
+.sa-section-header {
+  margin-bottom: 0;
+}
+
+/* ── CITIES GRID ──────────────────────────────────────────────── */
+.sa-cities-section {
+  background: var(--bg-offwhite);
+}
+
+.sa-cities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.sa-city-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 24px;
+  text-decoration: none;
+  transition: all var(--transition-med);
+}
+
+.sa-city-card:hover {
+  transform: translateY(-6px);
+}
+
+.sa-city-card-pin {
+  width: 40px;
+  height: 40px;
+  background: rgba(191, 222, 123, 0.15);
+  border: 1px solid rgba(191, 222, 123, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-dark);
+  margin-bottom: 16px;
+}
+
+.sa-city-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.sa-city-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.sa-city-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: gap var(--transition-fast);
+}
+
+.sa-city-card:hover .sa-city-cta {
+  gap: 10px;
+}
+
+/* ── SERVICES GRID ────────────────────────────────────────────── */
+.sa-services-section {
+  background: var(--bg-offwhite);
+}
+
+.sa-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.sa-service-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: all var(--transition-med);
+}
+
+.sa-service-item:hover {
+  color: var(--green-dark);
+  transform: translateY(-4px);
+}
+
+.sa-service-arrow {
+  margin-left: auto;
+  opacity: 0.4;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.sa-service-item:hover .sa-service-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* ── WHY UBC ──────────────────────────────────────────────────── */
+.sa-why-section {
+  background: var(--bg-white);
+}
+
+.sa-why-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 72px;
+  align-items: start;
+}
+
+.detail-heading {
+  font-size: 2.4rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+}
+
+.sa-why-intro {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.sa-why-credentials {
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sa-cred-block {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 16px;
+}
+
+.sa-cred-block:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.sa-cred-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.sa-cred-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.sa-cred-highlight {
+  font-size: 1.1rem;
+  color: var(--green-dark);
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+.sa-cred-phone {
+  color: var(--green-dark);
+  font-weight: 700;
+  transition: color var(--transition-fast);
+}
+
+.sa-cred-phone:hover {
+  color: var(--green-primary);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .sa-hero-content {
+    grid-template-columns: 1fr 360px;
+    gap: 40px;
+  }
+
+  .sa-trust-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sa-cities-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sa-services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sa-why-grid {
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sa-hero-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .sa-hero-map {
+    position: static;
+    max-width: 480px;
+  }
+
+  .sa-h1 {
+    font-size: 2.6rem;
+  }
+
+  .sa-why-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .sa-cities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sa-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .sa-trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .sa-cities-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .sa-services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sa-h1 {
+    font-size: 2.1rem;
+  }
+
+  .sa-hero-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .sa-cities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sa-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sa-trust-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,219 @@
+.before-after {
+  position: relative;
+  padding: var(--section-pad) 0;
+  background:
+    linear-gradient(180deg, rgba(244, 242, 235, 0.94), rgba(255, 255, 255, 0.96)),
+    var(--bg-soft);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(13, 13, 13, 0.05);
+}
+
+.before-after .container {
+  position: relative;
+  z-index: 2;
+}
+
+.ba-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 64px;
+}
+
+.ba-content {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: center;
+}
+
+/* Slider Container */
+.comparison-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 6px solid rgba(255, 255, 255, 0.9);
+  background: var(--bg-soft);
+  clip-path: var(--shape-clip);
+}
+
+.comp-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* After Image (Background) */
+.img-after-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Before Image (Foreground) */
+.img-before-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.img-before-wrapper .comp-img {
+  width: 100cqw;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  max-width: none;
+}
+
+/* Support for container queries so the before image scales perfectly */
+.comparison-container {
+  container-type: inline-size;
+}
+
+/* Labels */
+.comp-label {
+  position: absolute;
+  top: 24px;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 0;
+  border: 1px solid rgba(13, 13, 13, 0.05);
+  z-index: 5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: var(--shadow-sm);
+  clip-path: var(--shape-clip-chip);
+}
+
+.label-after { right: 24px; }
+.label-before { left: 24px; }
+
+/* Invisible Range Input */
+.comp-slider {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 10;
+  margin: 0;
+}
+
+/* Custom Slider Line & Button */
+.slider-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, transparent, var(--bg-white) 12%, var(--bg-white) 88%, transparent);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 8;
+  box-shadow: 0 0 10px rgba(13, 13, 13, 0.2);
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  color: var(--text-dark);
+  border: 1px solid rgba(13, 13, 13, 0.05);
+  backdrop-filter: blur(14px);
+  clip-path: var(--shape-clip-tight);
+}
+
+.slider-button-sep {
+  width: 2px;
+  height: 20px;
+  background: rgba(13, 13, 13, 0.1);
+  margin: 0 4px;
+}
+
+/* Project Details */
+.ba-details {
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 0;
+  padding: 48px;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(18px);
+  clip-path: var(--shape-clip);
+}
+
+.ba-details h3 {
+  font-size: 1.6rem;
+  color: var(--text-dark);
+  margin-bottom: 32px;
+  font-weight: 800;
+}
+
+.ba-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.ba-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.ba-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ba-features strong {
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.ba-btn {
+  display: inline-flex;
+}
+
+/* Mobile & Smaller Tablets */
+@media (max-width: 768px) {
+  .comparison-container {
+    aspect-ratio: 4/5;
+  }
+  .ba-details {
+    padding: 32px 24px;
+  }
+  .comp-label {
+    top: auto;
+    bottom: 24px;
+  }
+  .ba-features {
+    grid-template-columns: 1fr;
+  }
+}

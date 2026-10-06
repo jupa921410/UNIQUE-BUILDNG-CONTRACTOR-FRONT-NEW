@@ -1,0 +1,226 @@
+.testimonials {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #fff, rgba(251, 250, 246, 0.94)),
+    var(--bg-white);
+}
+
+.testimonials-header {
+  margin-bottom: 64px;
+}
+
+/* ---- SLIDER CONTAINER ---- */
+.testimonial-slider-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto 64px;
+}
+
+/* ---- FEATURED CARD ---- */
+.testimonial-featured {
+  position: relative;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 0;
+  padding: 64px 80px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 32px;
+  clip-path: var(--shape-clip);
+}
+
+.featured-quote-icon {
+  position: absolute;
+  top: 40px;
+  right: 64px;
+  color: rgba(87, 143, 37, 0.08);
+  pointer-events: none;
+}
+
+.featured-content { 
+  position: relative;
+  z-index: 2;
+}
+
+.star-rating { 
+  display: flex; 
+  gap: 4px; 
+  margin-bottom: 24px; 
+}
+
+.star-filled {
+  color: #f5c842;
+}
+
+.star-empty {
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.featured-text {
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  line-height: 1.8;
+  margin-bottom: 40px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.featured-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.author-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-sm);
+  clip-path: var(--shape-clip-tight);
+}
+
+.author-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.author-project {
+  color: var(--green-primary);
+  font-weight: 600;
+}
+
+.author-sep { color: var(--text-light); }
+
+.author-location { color: var(--text-muted); }
+
+/* Navigation */
+.testi-nav-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.testi-nav-btn {
+  width: 48px; 
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0;
+  color: var(--text-dark);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  clip-path: var(--shape-clip-tight);
+}
+
+.testi-nav-btn:hover {
+  background: var(--green-primary);
+  border-color: var(--green-primary);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.testi-dots { 
+  display: flex; 
+  gap: 8px; 
+}
+
+.testi-dot {
+  width: 8px; 
+  height: 8px;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  transform: rotate(45deg);
+}
+
+.testi-dot.active {
+  background: var(--green-primary);
+  width: 24px;
+  border-radius: 0;
+  transform: none;
+}
+
+/* ---- RATING SUMMARY ---- */
+.rating-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(18, 22, 17, 0.07);
+}
+
+.rating-big {
+  font-size: 4rem;
+  font-weight: 900;
+  background: var(--gradient-logo);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.rating-detail { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px; 
+}
+
+.rating-stars { 
+  display: flex; 
+  gap: 4px; 
+}
+
+.rating-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.rating-source {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Tablets & Smaller */
+@media (max-width: 1024px) {
+  .testimonial-featured { padding: 48px 56px; }
+}
+
+/* Mobile & Smaller Tablets */
+@media (max-width: 768px) {
+  .testimonial-featured { padding: 40px 24px; }
+  .featured-text { font-size: 1.05rem; }
+  .featured-quote-icon { display: none; }
+  
+  .rating-summary {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .rating-stars { justify-content: center; }
+}

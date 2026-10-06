@@ -1,0 +1,200 @@
+/* ── THANK YOU PAGE ───────────────────────────────────────────── */
+
+.thank-you-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.thank-you-section {
+  flex: 1;
+  background: var(--bg-offwhite);
+  padding-top: 120px;
+}
+
+.thank-you-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Card */
+.thank-you-card {
+  padding: 64px 56px;
+  text-align: center;
+}
+
+/* Check icon */
+.ty-icon-wrap {
+  margin-bottom: 24px;
+}
+
+.ty-check {
+  color: var(--green-primary);
+  filter: drop-shadow(0 0 18px rgba(191, 222, 123, 0.5));
+}
+
+.ty-heading {
+  font-size: 3rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+.ty-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+/* Next steps */
+.ty-next-steps {
+  text-align: left;
+  background: rgba(191, 222, 123, 0.06);
+  border: 1px solid rgba(191, 222, 123, 0.2);
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.ty-next-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ty-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ty-steps li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.ty-step-num {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: var(--green-primary);
+  color: var(--charcoal);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.ty-steps li div strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  color: var(--text-dark);
+}
+
+.ty-steps li div p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Trust bar */
+.ty-trust-bar {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  border-top: 1px solid rgba(191, 222, 123, 0.2);
+  border-bottom: 1px solid rgba(191, 222, 123, 0.2);
+  margin-bottom: 32px;
+}
+
+.ty-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Action buttons */
+.ty-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Explore links */
+.ty-explore {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 28px;
+  margin-top: 8px;
+}
+
+.ty-explore > p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.ty-explore-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ty-explore-links a {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  border-bottom: 1px solid rgba(77, 89, 50, 0.3);
+  padding-bottom: 2px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.ty-explore-links a:hover {
+  color: var(--green-primary);
+  border-color: var(--green-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .thank-you-card {
+    padding: 40px 28px;
+  }
+
+  .ty-heading {
+    font-size: 2.2rem;
+  }
+
+  .ty-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ty-trust-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .ty-next-steps {
+    padding: 24px 20px;
+  }
+}

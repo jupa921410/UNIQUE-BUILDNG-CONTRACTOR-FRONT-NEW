@@ -1,0 +1,14 @@
+.specialized-page {
+  background: var(--bg-white);
+  min-height: 100vh;
+}
+
+.page-header-spacer {
+  height: 100px; /* Adjust based on navbar height */
+}
+
+@media (max-width: 768px) {
+  .page-header-spacer {
+    height: 80px;
+  }
+}

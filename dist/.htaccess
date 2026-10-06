@@ -1,0 +1,49 @@
+# Unique Building Contractors — SPA routing + prerendered portfolio pages
+# (Apache / Hostinger shared hosting).
+#
+#  WARNING: this file is copied into dist/ by the build and will overwrite any
+#  .htaccess already sitting in public_html on deploy. If you keep custom rules
+#  there (forced HTTPS, www<->non-www redirect, extra security headers), MERGE
+#  the mod_rewrite block below into that file instead of overwriting it.
+
+Options -MultiViews -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Never touch the shell itself (prevents a rewrite loop).
+  RewriteRule ^index\.html$ - [L]
+
+  # 1. Real files are served untouched — hashed JS/CSS/images, robots.txt,
+  #    sitemap.xml, the IndexNow key, portfolio-sitemap.php, and every
+  #    generated /portfolio/**/index.html page.
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # 2. Paths that have a prerendered index.html (/portfolio/, /portfolio/<slug>/)
+  #    are served straight from that file — same result with or without the
+  #    trailing slash and with no extra 301 redirect.
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.+?)/?$ /$1/index.html [L]
+
+  # 3. Everything else is a client-side route → hand over the SPA shell.
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+# 404s for unknown asset files still return the SPA shell so deep links work.
+ErrorDocument 404 /index.html
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2?|ttf|otf|eot|png|jpe?g|gif|svg|webp|avif|ico|mp4|webm)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html|xml|txt|json|php)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>

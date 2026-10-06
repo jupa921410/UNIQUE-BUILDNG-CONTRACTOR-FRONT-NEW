@@ -1,0 +1,47 @@
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 34px;
+  pointer-events: none;
+  z-index: 10000;
+  transform-origin: 22% 78%;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.24));
+}
+
+.custom-cursor-hammer {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: rotate(7deg);
+  transition: filter 0.16s ease;
+}
+
+.custom-cursor.hovering .custom-cursor-hammer {
+  filter: saturate(1.12) brightness(1.05);
+}
+
+.hide-default-cursor,
+.hide-default-cursor * {
+  cursor: none !important;
+}
+
+@media (max-width: 1024px) {
+  .custom-cursor {
+    display: none !important;
+  }
+
+  .hide-default-cursor,
+  .hide-default-cursor * {
+    cursor: auto !important;
+  }
+
+  .hide-default-cursor a,
+  .hide-default-cursor button {
+    cursor: pointer !important;
+  }
+}

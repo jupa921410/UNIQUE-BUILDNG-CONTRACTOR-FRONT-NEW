@@ -1,0 +1,1 @@
+var e=`/assets/after_kitchen-BbBSVDyJ.png`;export{e as t};

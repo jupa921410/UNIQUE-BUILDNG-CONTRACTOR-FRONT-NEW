@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /portal
+
+# OpenAI / ChatGPT crawlers — explicitly allowed so ChatGPT can discover and cite this site
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /portal
+
+User-agent: GPTBot
+Allow: /
+Disallow: /portal
+
+Sitemap: https://www.uniquebuildingcontractors.com/sitemap.xml
+# Always-fresh portfolio sitemap — proxied from the CMS so newly published
+# projects are discoverable without a front-end rebuild (see portfolio-sitemap.php).
+Sitemap: https://www.uniquebuildingcontractors.com/portfolio-sitemap.php
