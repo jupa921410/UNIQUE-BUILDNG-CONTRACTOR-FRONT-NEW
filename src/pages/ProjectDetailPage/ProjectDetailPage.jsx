@@ -1,3 +1,4 @@
+import ResponsiveImage from '../../components/ResponsiveImage';
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -23,7 +24,7 @@ import {
   fetchShowcaseProject,
   formatCompletionDate,
 } from '../../services/showcaseService';
-import { API_BASE_URL } from '../../config/api';
+import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer';
 import './ProjectDetailPage.css';
 import SEO, { breadcrumbSchema, SITE_URL } from '../../components/SEO/SEO';
 
@@ -46,9 +47,9 @@ function StatusBadge({ status }) {
 }
 
 // ── Image lightbox / gallery ───────────────────────────────────────────────
-function MediaViewer({ item }) {
+function MediaViewer({ item, location, projectTitle }) {
   if (!item) return null;
-  const caption = item.caption || 'Project media';
+  const caption = `${item.caption || projectTitle || 'Construction project'}, ${location || 'Tampa Bay FL'}`;
 
   switch (item.media_type) {
     case 'video':
@@ -69,14 +70,7 @@ function MediaViewer({ item }) {
       return (
         <div className="pdp-gallery-media-wrap pdp-gallery-360">
           {item.url ? (
-            <iframe
-              src={`${API_BASE_URL}/storage/viewer/pannellum.htm?panorama=${encodeURIComponent(item.url)}&autoLoad=true&hfov=110&pitch=10&yaw=180`}
-              width="100%"
-              height="100%"
-              style={{ border: 'none', background: '#000' }}
-              allowFullScreen
-              title={caption}
-            />
+            <PanoramaViewer key={item.url} src={item.url} title={caption} />
           ) : (
             <div className="pdp-gallery-media-empty">360° image not available</div>
           )}
@@ -106,7 +100,7 @@ function MediaViewer({ item }) {
       return (
         <div className="pdp-gallery-media-wrap">
           {item.url ? (
-            <img
+            <ResponsiveImage
               src={item.url}
               alt={caption}
               className="pdp-gallery-media"
@@ -119,7 +113,7 @@ function MediaViewer({ item }) {
   }
 }
 
-function Gallery({ images }) {
+function Gallery({ images, location, projectTitle }) {
   const [current, setCurrent] = useState(0);
 
   if (!images?.length) return null;
@@ -145,7 +139,7 @@ function Gallery({ images }) {
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
-            <MediaViewer item={ordered[current]} />
+            <MediaViewer item={ordered[current]} location={location} projectTitle={projectTitle} />
           </motion.div>
         </AnimatePresence>
 
@@ -179,7 +173,7 @@ function Gallery({ images }) {
               aria-label={`Go to media ${i + 1}`}
             >
               {item.url ? (
-                <img src={item.url} alt={item.caption || `Media ${i + 1}`} />
+                <ResponsiveImage src={item.url} alt={`${item.caption || `Project photo ${i + 1}`}, ${location || "Tampa Bay FL"}`} />
               ) : (
                 <div className="pdp-thumb-placeholder">
                   {item.media_type === 'iframe'
@@ -360,7 +354,7 @@ export default function ProjectDetailPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.1 }}
           >
-            <Gallery images={project.images} />
+            <Gallery images={project.images} location={project.location} projectTitle={project.title} />
 
             {project.description && (
               <div className="pdp-description glass-card">

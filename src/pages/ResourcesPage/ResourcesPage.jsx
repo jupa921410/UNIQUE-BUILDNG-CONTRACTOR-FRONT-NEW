@@ -1,5 +1,11 @@
+import ResponsiveImage from '../../components/ResponsiveImage';
 import { Link } from 'react-router-dom';
 import SEO, { breadcrumbSchema, SITE_URL } from '../../components/SEO/SEO';
+import ConceptHero from '../../components/ConceptHero/ConceptHero';
+import materials from '../../assets/redesign/materials.webp';
+import interior from '../../assets/redesign/interior.webp';
+import bathroom from '../../assets/redesign/bathroom.webp';
+import flooring from '../../assets/redesign/flooring.webp';
 import './ResourcesPage.css';
 
 const resources = [
@@ -18,16 +24,17 @@ export default function ResourcesPage() {
     about: { '@id': `${SITE_URL}/#business` },
   };
   return (
-    <main className="resources-page section">
+    <main className="resources-page">
       <SEO title="Construction & Remodeling Resources" description="Practical planning guidance for Tampa Bay kitchen, bathroom, flooring, addition and home remodeling projects." schema={[schema, breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Resources', path: '/resources' }])]} />
-      <div className="container">
+      <ConceptHero title="Better plans. Beautiful possibilities." label="The planning library" description="Practical starting points for your next construction or renovation project. Explore the decisions that shape a home." image={materials} cutout={false} cta="Explore the guides" to="/resources#planning-guides" />
+      <div className="container section" id="planning-guides">
         <div className="section-badge">Planning Guides</div>
-        <h1 className="section-title">Construction & <span>Remodeling Resources</span></h1>
+        <h2 className="section-title">Construction & <span>Remodeling Resources</span></h2>
         <p className="section-subtitle">Factual starting points for planning a Tampa Bay construction or remodeling project. Project-specific scope, pricing, schedules, and permit requirements require an individual evaluation.</p>
         <div className="resources-grid">
-          {resources.map(resource => <article key={resource.id} id={resource.id} className="glass-card resource-card"><h2>{resource.title}</h2><p>{resource.text}</p></article>)}
+          {resources.map((resource, index) => <article key={resource.id} id={resource.id} className="glass-card resource-card"><ResponsiveImage className="resource-image" src={[interior, bathroom, flooring, materials][index % 4]} alt={`Architectural inspiration: ${resource.title}, Tampa Bay FL`} loading="lazy" /><div className="resource-copy"><h2>{resource.title}</h2><p>{resource.text}</p></div></article>)}
         </div>
-        <div className="resource-links"><Link to="/services/remodeling">Explore remodeling services</Link><Link to="/portfolio">View our portfolio</Link><Link to="/#contact">Discuss your project</Link></div>
+        <div className="resource-links"><Link to="/blog">Read our construction and remodeling blog</Link><Link to="/services/remodeling">Explore remodeling services</Link><Link to="/portfolio">View our portfolio</Link><Link to="/#contact">Discuss your project</Link></div>
       </div>
     </main>
   );

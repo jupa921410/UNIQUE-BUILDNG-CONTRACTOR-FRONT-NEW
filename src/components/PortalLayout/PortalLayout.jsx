@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LogOut, LayoutDashboard, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { usePortalAuth } from '../../context/PortalAuthContext';
-import logo from '../../assets/1x/logo.png';
+import BrandLogo from '../BrandLogo/BrandLogo';
 import './PortalLayout.css';
 
 export default function PortalLayout({ children }) {
@@ -20,7 +20,7 @@ export default function PortalLayout({ children }) {
     <div className="portal-shell">
       <header className="portal-topbar">
         <Link to="/portal" className="portal-brand">
-          <img src={logo} alt="Unique Building Contractors" />
+          <BrandLogo compact />
           <span>Client Portal</span>
         </Link>
 
@@ -56,7 +56,7 @@ export default function PortalLayout({ children }) {
 
       <footer className="portal-footer">
         <p>&copy; {new Date().getFullYear()} Unique Building Contractors — Client Portal</p>
-        <a href="tel:+18135237828">813-523-7828</a>
+        <a href="tel:+18135237828">(813) 523-7828</a>
       </footer>
     </div>
   );

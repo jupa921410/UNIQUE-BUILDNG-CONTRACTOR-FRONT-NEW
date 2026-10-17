@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, CheckCircle2, ArrowRight, Phone } from 'lucide-react';
+import { MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
 import SEO, { breadcrumbSchema, SITE_URL } from '../../components/SEO/SEO';
 import { PHASE1_CITIES } from '../../data/serviceAreasData';
 import Contact from '../../components/Contact/Contact';
+import ConceptHero from '../../components/ConceptHero/ConceptHero';
 import './ServiceAreasPage.css';
 
 const CITY_DESCRIPTIONS = {
@@ -69,73 +70,7 @@ export default function ServiceAreasPage() {
       />
 
       {/* ── HERO ────────────────────────────────────────────────────── */}
-      <section className="sa-hero section">
-        <div className="container sa-hero-content">
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="sa-hero-text"
-          >
-            {/* Breadcrumb */}
-            <nav className="sa-breadcrumb" aria-label="Breadcrumb">
-              <Link to="/">Home</Link>
-              <span>/</span>
-              <span aria-current="page">Service Areas</span>
-            </nav>
-
-            <div className="section-badge">Tampa Bay Coverage</div>
-            <h1 className="sa-h1">
-              Remodeling Contractors<br />
-              <span>Serving Tampa Bay, FL</span>
-            </h1>
-            <p className="sa-hero-desc">
-              Unique Building Contractors is a Florida Certified Building Contractor
-              (License&nbsp;CBC1268844) serving homeowners throughout the Tampa Bay region.
-              We offer kitchen remodeling, bathroom renovations, whole-home renovations,
-              home additions, flooring, and construction management — with permits managed
-              and all trades coordinated under one contract.
-            </p>
-            <div className="sa-hero-actions">
-              <a href="tel:8135237828" className="btn btn-primary">
-                <Phone size={18} />
-                Call UBC — 813-523-7828
-              </a>
-              <Link to="/#contact" className="btn btn-secondary">
-                Free Consultation <ArrowRight size={18} />
-              </Link>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="sa-hero-map glass-card"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            aria-hidden="true"
-          >
-            <div className="sa-map-header">
-              <MapPin size={22} className="text-green" />
-              <span>Areas We Serve</span>
-            </div>
-            <ul className="sa-map-cities">
-              {PHASE1_CITIES.map(({ slug, city }) => (
-                <li key={slug}>
-                  <Link to={`/service-areas/${slug}`} className="sa-map-city-link">
-                    <MapPin size={14} />
-                    {city}, FL
-                    <ArrowRight size={14} className="sa-map-arrow" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="sa-map-note">
-              Also serving Safety Harbor, Dunedin, Odessa, Valrico, Apollo Beach,
-              Carrollwood, and other Tampa Bay communities — contact us to confirm coverage.
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <ConceptHero title="Local knowledge. Lasting homes." label="Serving Tampa Bay, Florida" description="Construction and remodeling for the places we call home. Explore our Tampa Bay service areas and find the right approach for your neighborhood." cta="Find your neighborhood" to="/service-areas#sa-cities-heading" />
 
       {/* ── TRUST BAR ───────────────────────────────────────────────── */}
       <section className="sa-trust-section" aria-label="Trust indicators">
@@ -158,13 +93,13 @@ export default function ServiceAreasPage() {
       <section className="sa-cities-section section" aria-labelledby="sa-cities-heading">
         <div className="container">
           <div className="sa-section-header text-center">
-            <div className="section-badge">Phase 1 Coverage</div>
+            <div className="section-badge">Our communities</div>
             <h2 id="sa-cities-heading" className="section-title">
               Cities We <span>Serve</span>
             </h2>
             <p className="section-subtitle" style={{ margin: '0 auto 60px' }}>
-              Each city has its own dedicated page with location-specific information,
-              services, and local remodeling context.
+              Explore the neighborhoods we serve, with local information,
+              services and guidance for your home.
             </p>
           </div>
 
@@ -276,7 +211,7 @@ export default function ServiceAreasPage() {
             <div className="sa-cred-block">
               <div className="sa-cred-label">Contact</div>
               <div className="sa-cred-value">
-                <a href="tel:8135237828" className="sa-cred-phone">813-523-7828</a>
+                <a href="tel:+18135237828" className="sa-cred-phone">(813) 523-7828</a>
               </div>
             </div>
           </motion.div>

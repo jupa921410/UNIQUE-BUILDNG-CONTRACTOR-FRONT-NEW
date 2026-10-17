@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { KeyRound, AlertCircle } from 'lucide-react';
 import { usePortalAuth } from '../../../context/PortalAuthContext';
 import SEO from '../../../components/SEO/SEO';
-import logo from '../../../assets/1x/logo.png';
+import BrandLogo from '../../../components/BrandLogo/BrandLogo';
 import '../PortalLogin/PortalAuth.css';
 
 export default function PortalResetPassword() {
@@ -40,7 +40,7 @@ export default function PortalResetPassword() {
     <div className="portal-auth-page">
       <SEO title="Set Your Password" description="Set your Unique Building Contractors client portal password." noindex />
       <div className="portal-auth-card">
-        <img src={logo} alt="Unique Building Contractors" className="portal-auth-logo" />
+        <div className="portal-auth-brand"><BrandLogo /></div>
         <h1>Set Your Password</h1>
         <p className="portal-auth-sub">Choose a password to activate your client portal account{email ? ` for ${email}` : ''}.</p>
 

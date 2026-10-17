@@ -1,3 +1,4 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, X, ArrowRight } from 'lucide-react';
@@ -79,7 +80,7 @@ export default function OurTeams() {
               onClick={() => setSelectedMember(member)}
             >
               <div className="team-image-container">
-                <img src={member.image} alt={member.name} className="team-image" />
+                <ResponsiveImage src={member.image} alt={member.name} className="team-image" />
                 <div className="team-view-overlay">
                   <span className="view-text">View Profile</span>
                 </div>
@@ -116,7 +117,7 @@ export default function OurTeams() {
               <div className="modal-body">
                 <div className="modal-image-side">
                   <div className="modal-img-wrap">
-                    <img src={selectedMember.image} alt={selectedMember.name} />
+                    <ResponsiveImage src={selectedMember.image} alt={selectedMember.name} />
                   </div>
                   <div className="modal-socials">
                     <a href="#" className="modal-social-btn">
@@ -127,7 +128,7 @@ export default function OurTeams() {
                       </svg>
                     </a>
                     <a href="#" className="modal-social-btn"><Mail size={20} /></a>
-                    <a href="tel:8135237828" className="modal-social-btn"><Phone size={20} /></a>
+                    <a href="tel:+18135237828" className="modal-social-btn"><Phone size={20} /></a>
                   </div>
                 </div>
 

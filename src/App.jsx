@@ -1,6 +1,8 @@
 import { Suspense, lazy, useEffect } from 'react'
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import './index.css'
+import './marketing.css'
+import './portal-theme.css'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import { PortalAuthProvider } from './context/PortalAuthContext'
@@ -40,6 +42,10 @@ const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage/ProjectDe
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'))
 const LegalPage = lazy(() => import('./pages/LegalPage/LegalPage'))
 const ResourcesPage = lazy(() => import('./pages/ResourcesPage/ResourcesPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage/ContactPage'))
+const FAQPage = lazy(() => import('./pages/FAQPage/FAQPage'))
+const BlogPage = lazy(() => import('./pages/BlogPage/BlogPage'))
+const BlogPostPage = lazy(() => import('./pages/BlogPage/BlogPostPage'))
 const ServiceAreasPage = lazy(() => import('./pages/ServiceAreasPage/ServiceAreasPage'))
 const CityPage = lazy(() => import('./pages/CityPage/CityPage'))
 const ThankYouPage = lazy(() => import('./pages/ThankYouPage/ThankYouPage'))
@@ -79,7 +85,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className="app marketing-app">
       <ScrollToHash />
       <Navbar />
       <Suspense fallback={<div className="page-loader"></div>}>
@@ -93,6 +99,10 @@ function App() {
           <Route path="/privacy" element={<LegalPage type="privacy" />} />
           <Route path="/terms" element={<LegalPage type="terms" />} />
           <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/service-areas" element={<ServiceAreasPage />} />
           <Route path="/service-areas/:citySlug" element={<CityPage />} />
           <Route path="/thank-you" element={<ThankYouPage />} />

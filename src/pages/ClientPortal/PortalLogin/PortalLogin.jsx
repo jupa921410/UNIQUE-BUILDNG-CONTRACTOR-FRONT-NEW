@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LogIn, AlertCircle } from 'lucide-react';
 import { usePortalAuth } from '../../../context/PortalAuthContext';
 import SEO from '../../../components/SEO/SEO';
-import logo from '../../../assets/1x/logo.png';
+import BrandLogo from '../../../components/BrandLogo/BrandLogo';
 import './PortalAuth.css';
 
 export default function PortalLogin() {
@@ -34,7 +34,7 @@ export default function PortalLogin() {
     <div className="portal-auth-page">
       <SEO title="Client Login" description="Log in to your Unique Building Contractors client portal." noindex />
       <div className="portal-auth-card">
-        <img src={logo} alt="Unique Building Contractors" className="portal-auth-logo" />
+        <div className="portal-auth-brand"><BrandLogo /></div>
         <h1>Client Portal</h1>
         <p className="portal-auth-sub">Log in to track your project, sign documents, choose finishes and chat with your team.</p>
 

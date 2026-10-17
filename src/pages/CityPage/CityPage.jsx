@@ -1,20 +1,14 @@
-import { useParams, Link, Navigate } from 'react-router-dom';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, CheckCircle2, ArrowRight, Phone, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import SEO, { cityPageSchema } from '../../components/SEO/SEO';
 import { getCityData, getNearbyAreas } from '../../data/serviceAreasData';
 import Contact from '../../components/Contact/Contact';
+import ConceptHero from '../../components/ConceptHero/ConceptHero';
 import './CityPage.css';
 
-const TRUST_BADGES = [
-  'Licensed Contractor',
-  'Fully Insured',
-  'Permit Management',
-  'Tampa Bay Service Area',
-  'Project Management',
-  'Professional Remodeling',
-];
 
 /* ── FAQ Accordion item ─────────────────────────────────────── */
 function FaqItem({ question, answer, index }) {
@@ -73,7 +67,7 @@ export default function CityPage() {
   const cityData = getCityData(citySlug);
 
   if (!cityData) {
-    return <Navigate to="/service-areas" replace />;
+    return <NotFoundPage />;
   }
 
   const nearbyAreas = getNearbyAreas(citySlug);
@@ -108,68 +102,7 @@ export default function CityPage() {
       </nav>
 
       {/* ── HERO ────────────────────────────────────────────────── */}
-      <section className="cp-hero section">
-        <div className="container cp-hero-content">
-          <motion.div
-            className="cp-hero-text"
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="section-badge">
-              <MapPin size={13} />
-              {city}, {state}
-            </div>
-            <h1 className="cp-h1">{h1}</h1>
-            <p className="cp-hero-desc">{introParagraphs[0]}</p>
-            <div className="cp-hero-actions">
-              <a href="tel:8135237828" className="btn btn-primary">
-                <Phone size={18} />
-                Call UBC — 813-523-7828
-              </a>
-              <a href="#cp-cta-form" className="btn btn-secondary">
-                Free Consultation <ArrowRight size={18} />
-              </a>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="cp-hero-license glass-card"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-          >
-            <div className="cp-license-header">
-              <CheckCircle2 size={22} className="text-green" />
-              <span>Florida Certified Contractor</span>
-            </div>
-            <div className="cp-license-block">
-              <div className="cp-license-label">Company</div>
-              <div className="cp-license-value">Unique Building Contractors LLC</div>
-            </div>
-            <div className="cp-license-block">
-              <div className="cp-license-label">License Type</div>
-              <div className="cp-license-value">Certified Building Contractor</div>
-            </div>
-            <div className="cp-license-block">
-              <div className="cp-license-label">License Number</div>
-              <div className="cp-license-value cp-license-num">CBC1268844</div>
-            </div>
-            <div className="cp-license-block">
-              <div className="cp-license-label">Serving</div>
-              <div className="cp-license-value">{city} & Tampa Bay, FL</div>
-            </div>
-            <div className="cp-trust-badges">
-              {TRUST_BADGES.map(b => (
-                <span key={b} className="cp-badge">
-                  <CheckCircle2 size={12} />
-                  {b}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <ConceptHero imageAlt={`Architectural concept for home remodeling in ${city}, ${state}`} title={h1} label={city + ", " + state} description={introParagraphs[0]} cta="Plan your renovation" to={`/service-areas/${slug}#cp-cta-form`} />
 
       {/* ── SERVICES IN CITY ────────────────────────────────────── */}
       <section className="cp-services-section section section-dark" aria-labelledby="cp-services-heading">
@@ -310,7 +243,7 @@ export default function CityPage() {
               Real reviews from verified clients across the Tampa Bay region.
             </p>
           </div>
-          <TestimonialCard testimonial={testimonial} />
+          {testimonial ? <TestimonialCard testimonial={testimonial} /> : <p>Explore our portfolio and discuss your project with our team.</p>}
         </div>
       </section>
 
@@ -421,9 +354,9 @@ export default function CityPage() {
               honest guidance — no obligation, no pressure.
             </p>
             <div className="cp-cta-actions">
-              <a href="tel:8135237828" className="btn btn-terra">
+              <a href="tel:+18135237828" className="btn btn-terra">
                 <Phone size={18} />
-                Call UBC — 813-523-7828
+                Call UBC — (813) 523-7828
               </a>
             </div>
           </motion.div>

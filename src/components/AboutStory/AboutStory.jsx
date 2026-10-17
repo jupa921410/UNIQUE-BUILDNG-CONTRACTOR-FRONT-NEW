@@ -1,3 +1,4 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { motion } from 'framer-motion';
 import { ShieldCheck, MapPin, Award, Users, Heart, ArrowRight, Zap, Waves, Building2, Anchor, Quote } from 'lucide-react';
 import aboutHeroImg from '../../assets/about.png';
@@ -44,7 +45,7 @@ export default function AboutStory() {
       {/* 1. CINEMATIC HERO */}
       <section className="story-hero-redesign">
         <div className="story-hero-visual">
-          <img src={aboutHeroImg} alt="UBC Team" className="hero-parallax-img" />
+          <ResponsiveImage src={aboutHeroImg} alt="UBC Team" className="hero-parallax-img" />
           <div className="hero-vignette"></div>
         </div>
         <div className="container">
@@ -143,7 +144,7 @@ export default function AboutStory() {
       {/* 3. COASTAL MASTERY */}
       <section className="coastal-mastery section">
         <div className="coastal-bg-overlay">
-          <img src={planImg} alt="Architectural Plan" />
+          <ResponsiveImage src={planImg} alt="Architectural Plan" />
         </div>
         <div className="container">
           <div className="coastal-content-wrap">
@@ -214,7 +215,7 @@ export default function AboutStory() {
       {/* 5. OUR COMMITMENT (Premium Redesign) */}
       <section className="commitment-final-luxury">
         <div className="commitment-bg">
-          <img src={afterKitchenImg} alt="Finished Luxury Kitchen" className="commitment-bg-img" />
+          <ResponsiveImage src={afterKitchenImg} alt="Finished Luxury Kitchen" className="commitment-bg-img" />
           <div className="commitment-overlay"></div>
         </div>
 

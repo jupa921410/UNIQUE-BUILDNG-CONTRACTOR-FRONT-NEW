@@ -1,7 +1,8 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Layers3, PlayCircle, Spline } from 'lucide-react';
-import logo1x from '../../assets/1x/logo.png';
+const logo1x = '/brand/logo-mini.svg';
 import './ConstructionShowcase.css';
 
 export default function ConstructionShowcase() {
@@ -9,7 +10,7 @@ export default function ConstructionShowcase() {
 
   return (
     <section className="construction-showcase section">
-      <img src={logo1x} alt="" className="construction-logo-mark" aria-hidden="true" />
+      <ResponsiveImage src={logo1x} alt="" className="construction-logo-mark" aria-hidden="true" />
       <div className="container construction-grid">
         <motion.div
           className="construction-copy"
@@ -45,7 +46,7 @@ export default function ConstructionShowcase() {
         >
           <div className="construction-video-wrap">
             <div className="video-logo-overlay">
-              <img src={logo1x} alt="UBC Logo" className="video-overlay-logo" />
+              <ResponsiveImage src={logo1x} alt="UBC Logo" className="video-overlay-logo" />
             </div>
             {!videoError ? (
               <video 
@@ -74,7 +75,7 @@ export default function ConstructionShowcase() {
 function BrandFallback({ logo1x }) {
   return (
     <div className="video-fallback-content">
-      <img src={logo1x} alt="Unique Building Contractor" className="fallback-logo" />
+      <ResponsiveImage src={logo1x} alt="Unique Building Contractor" className="fallback-logo" />
     </div>
   );
 }

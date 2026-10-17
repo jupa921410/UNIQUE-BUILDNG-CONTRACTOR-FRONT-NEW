@@ -1,39 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react';
+import { businessSchema } from '../../data/businessSchema.js';
+import { metaDescription, pageDescriptions } from '../../data/seoMetadata.js';
+
+export const SeoRenderContext = createContext(null);
 import { useLocation } from 'react-router-dom';
 
 export const SITE_URL = 'https://www.uniquebuildingcontractors.com';
 export const SITE_NAME = 'Unique Building Contractors';
 export const DEFAULT_IMAGE = `${SITE_URL}/meta.jpg`;
-
-const businessSchema = {
-  '@context': 'https://schema.org',
-  '@type': ['LocalBusiness', 'GeneralContractor'],
-  '@id': `${SITE_URL}/#business`,
-  name: SITE_NAME,
-  alternateName: 'UBC',
-  url: SITE_URL,
-  logo: `${SITE_URL}/web-app-manifest-512x512.png`,
-  image: DEFAULT_IMAGE,
-  telephone: '+1-813-523-7828',
-  email: 'sales@uniquebuildingcontractors.com',
-  priceRange: '$$',
-  areaServed: [
-    'Tampa, FL', 'Riverview, FL', 'Clearwater, FL', 'St. Petersburg, FL', 'Brandon, FL',
-    'Wesley Chapel, FL', 'Lutz, FL', 'Sarasota, FL', 'New Port Richey, FL',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Tampa',
-    addressRegion: 'FL',
-    addressCountry: 'US',
-  },
-  identifier: {
-    '@type': 'PropertyValue',
-    name: 'Florida Certified Building Contractor License',
-    value: 'CBC1268844',
-  },
-};
 
 export function OrganizationSchema() {
   const websiteSchema = {
@@ -55,19 +30,24 @@ export function OrganizationSchema() {
 
 export default function SEO({
   title,
-  description,
+  description: rawDescription,
   path,
-  image = DEFAULT_IMAGE,
+  image,
   type = 'website',
   noindex = false,
   schema,
 }) {
+  const collect = useContext(SeoRenderContext);
   const location = useLocation();
   const cleanPath = path ?? location.pathname;
+  const description = metaDescription(pageDescriptions[cleanPath] || rawDescription);
   const canonical = `${SITE_URL}${cleanPath === '/' ? '/' : cleanPath.replace(/\/$/, '')}`;
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
   const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
-  const resolvedImage = image || DEFAULT_IMAGE;
+  const previewKey = cleanPath === '/' ? 'home' : cleanPath.replace(/^\/|\/$/g, '').replace(/[^a-z0-9-]/gi, '-');
+  const resolvedImage = image || `${SITE_URL}/previews/${previewKey}.jpg`;
+
+  if (collect) collect({ title: fullTitle, description, canonical, image: resolvedImage, type, noindex });
 
   // index.html ships static <title>/<meta name="description">/<meta name="robots">
   // and a base <link rel="canonical"> for the first crawl. React 19 hoists tags
@@ -76,6 +56,7 @@ export default function SEO({
   useEffect(() => {
     // React owns route schemas after mount; discard the build-time service schema.
     document.getElementById('ubc-service-schema')?.remove();
+    document.getElementById('ubc-page-schema')?.remove();
     document.title = fullTitle;
 
     const setMeta = (selector, attribute, value) => {
@@ -107,6 +88,7 @@ export default function SEO({
     setMeta('meta[property="og:image"]', ['property', 'og:image'], resolvedImage);
     setMeta('meta[property="og:image:alt"]', ['property', 'og:image:alt'], `${SITE_NAME} construction and remodeling`);
     setMeta('meta[name="twitter:card"]', ['name', 'twitter:card'], 'summary_large_image');
+    setMeta('meta[name="twitter:url"]', ['name', 'twitter:url'], canonical);
     setMeta('meta[name="twitter:title"]', ['name', 'twitter:title'], fullTitle);
     setMeta('meta[name="twitter:description"]', ['name', 'twitter:description'], description);
     setMeta('meta[name="twitter:image"]', ['name', 'twitter:image'], resolvedImage);

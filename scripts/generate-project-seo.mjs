@@ -1,4 +1,10 @@
+import { normalizeProject, legacyPortfolioRoutes } from '../src/data/portfolioRoutes.js';
+import { finalizeSeo } from './finalize-seo.mjs';
+import { writePrerenderedPages } from './prerender-pages.mjs';
 import { serviceContent, serviceHtml } from './service-seo.mjs';
+import { contactFaqHtml } from './contact-faq-seo.mjs';
+import { writeBlogPages } from './blog-seo.mjs';
+import { renderSitemap, staticUrls } from './sitemap.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,27 +20,14 @@ const siteUrl = 'https://www.uniquebuildingcontractors.com';
 const mode = process.env.NODE_ENV || 'production';
 const viteEnv = loadEnv(mode, root, 'VITE_');
 const apiBase = (process.env.VITE_API_BASE_URL || viteEnv.VITE_API_BASE_URL || 'https://admin.uniquebuildingcontractors.com').replace(/\/$/, '');
-const buildDate = new Date().toISOString().slice(0, 10);
 
-const staticUrls = [
-  { path: '/',                                    changefreq: 'weekly',  priority: '1.0' },
-  { path: '/aboutus',                             changefreq: 'monthly', priority: '0.7' },
-  { path: '/portfolio',                           changefreq: 'weekly',  priority: '0.8' },
-  { path: '/specialized',                         changefreq: 'monthly', priority: '0.7' },
-  { path: '/resources',                           changefreq: 'monthly', priority: '0.7' },
-  { path: '/services/new-construction',           changefreq: 'monthly', priority: '0.9' },
-  { path: '/services/remodeling',                 changefreq: 'monthly', priority: '0.9' },
-  { path: '/services/additions',                  changefreq: 'monthly', priority: '0.8' },
-  { path: '/services/kitchens-bathrooms',         changefreq: 'monthly', priority: '0.9' },
-  { path: '/services/flooring',                   changefreq: 'monthly', priority: '0.8' },
-  { path: '/services/projectmanagement',          changefreq: 'monthly', priority: '0.7' },
-];
+
+
 
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 
-const escapeXml = escapeHtml;
 const plainText = (value = '') => String(value).replace(/\s+/g, ' ').trim();
 
 function replaceMeta(html, attribute, key, value) {
@@ -101,7 +94,7 @@ function projectHtml(template, project) {
 
   const serializedProject = JSON.stringify(project).replaceAll('<', '\\u003c');
   const seo = `    <script type="application/ld+json">${JSON.stringify(schemas).replaceAll('<', '\\u003c')}</script>\n    <script id="ubc-project-data" type="application/json">${serializedProject}</script>\n`;
-  const crawlableContent = `<article data-project-seo-snapshot><h1>${escapeHtml(project.title)}</h1><p>${escapeHtml(project.description)}</p>${primaryImage ? `<img src="${escapeHtml(primaryImage)}" alt="${escapeHtml(project.title)}" />` : ''}</article>`;
+  const crawlableContent = `<article data-project-seo-snapshot><h1>${escapeHtml(project.title)}</h1><p>${escapeHtml(project.description)}</p>${primaryImage ? `<img src="${escapeHtml(primaryImage)}" alt="${escapeHtml(project.title + (project.location ? ", " + project.location : ""))}" />` : ''}</article>`;
   return html
     .replace('</head>', `${seo}  </head>`)
     // The template's root div now ships its own home-page crawlable snapshot
@@ -175,10 +168,17 @@ async function fetchPublishedProjects() {
   const payload = await response.json();
   const projects = Array.isArray(payload) ? payload : payload.data;
   if (!Array.isArray(projects)) throw new Error('Showcase API did not return a project array');
-  return projects.filter(project => project?.slug);
+  return projects.filter(project => project?.slug).map(normalizeProject);
 }
 
 const template = await readFile(join(dist, 'index.html'), 'utf8');
+await writeBlogPages(dist);
+await writePrerenderedPages(root, dist, template);
+for (const path of ['/contact', '/faq']) {
+  const output = join(dist, path.slice(1), 'index.html');
+  await mkdir(dirname(output), { recursive: true });
+  await writeFile(output, contactFaqHtml(template, path, siteUrl), 'utf8');
+}
 for (const service of serviceContent) {
   const output = join(dist, 'services', service.id, 'index.html');
   await mkdir(dirname(output), { recursive: true });
@@ -200,27 +200,14 @@ for (const project of projects) {
   await writeFile(output, projectHtml(template, project), 'utf8');
 }
 
-const projectUrls = projects.map(project => ({
-  path: `/portfolio/${project.slug}`,
-  lastmod: project.completion_date
-    ? String(project.completion_date).slice(0, 10)
-    : buildDate,
-  changefreq: 'monthly',
-  priority: '0.7',
-}));
+await writeFile(join(dist, 'sitemap.xml'), renderSitemap(projects, siteUrl), 'utf8');
+console.log(`Generated SEO HTML for ${projects.length} published projects and sitemap.xml with ${staticUrls.length + projects.length} URLs.`);
 
-const allUrls = [
-  ...staticUrls.map(u => ({ ...u, lastmod: buildDate })),
-  ...projectUrls,
-];
+await finalizeSeo(dist);
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allUrls.map(({ path, lastmod, changefreq, priority }) =>
-  `  <url><loc>${escapeXml(`${siteUrl}${path}`)}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`
-).join('\n')}
-</urlset>
-`;
-await writeFile(join(dist, 'sitemap.xml'), sitemap, 'utf8');
-
-console.log(`Generated SEO HTML for ${projects.length} published projects and sitemap.xml with ${allUrls.length} URLs.`);
+// Redirect old project links before resolving prerendered files or the 404 rule.
+const htaccessPath = join(dist, '.htaccess');
+let htaccess = await readFile(htaccessPath, 'utf8');
+const redirects = Object.entries(legacyPortfolioRoutes).map(([from, to]) => `  RewriteRule ^portfolio/${from}/?$ /portfolio/${to} [R=301,L]`).join('\n');
+htaccess = htaccess.replace('  RewriteBase /', '  RewriteBase /\n' + redirects);
+await writeFile(htaccessPath, htaccess);

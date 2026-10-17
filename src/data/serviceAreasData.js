@@ -1,3 +1,4 @@
+import { additionalAreas } from './additionalAreas.js';
 /**
  * serviceAreasData.js
  * Central data source for all Local SEO city landing pages.
@@ -18,6 +19,7 @@ export const SERVICE_LINKS = [
 
 // All Phase 1 cities for hub page grid and internal linking
 export const PHASE1_CITIES = [
+  ...additionalAreas.map(({ slug, city }) => ({ slug, city })),
   { slug: 'tampa-fl',           city: 'Tampa' },
   { slug: 'carrollwood-fl',     city: 'Carrollwood' },
   { slug: 'clearwater-fl',      city: 'Clearwater' },
@@ -1021,6 +1023,25 @@ Unique Building Contractors (CBC1268844) provides Land O' Lakes homeowners with 
   },
 
 };
+
+// Use the same records for routing, static generation, the hub, and business areaServed.
+for (const area of additionalAreas) {
+  const { slug, city, context, focus } = area;
+  serviceAreasData[slug] = {
+    slug, city, state: 'FL',
+    seoTitle: `Remodeling Contractor in ${city}, FL | Unique Building Contractors`,
+    metaDescription: `Plan kitchen, bathroom and condo renovations in ${city}, FL with Unique Building Contractors. Explore remodeling, flooring and project coordination.`,
+    h1: `Home & Condo Remodeling in ${city}, FL`,
+    intro: `${context}\n\nUnique Building Contractors helps plan kitchen, bathroom, flooring and whole-home improvements in ${city}, with a scope tailored to the property and your priorities.`,
+    localContext: { heading: `Planning a renovation in ${city}`, points: [focus, 'Confirm the work scope, material selections and access arrangements before scheduling construction.', 'Permit and inspection requirements are evaluated for the property and proposed work.'] },
+    featuredServices: SERVICE_LINKS.map(({ id, label }) => ({ id, label, desc: `Discuss ${label.toLowerCase()} for your ${city} property.` })),
+    condoFocus: true,
+    permitAuthority: 'the applicable local building department',
+    localProjectsNote: focus,
+    faqs: [{ question: `Can you plan a condo renovation in ${city}?`, answer: 'Yes. We review the proposed scope, building requirements and access arrangements with you before coordinating the work.' }],
+    nearbyAreas: ['tampa-fl', 'clearwater-fl', 'st-petersburg-fl'],
+  };
+}
 
 /**
  * Helper: get city data by slug, returns null if not found

@@ -355,3 +355,98 @@
 .form-group textarea:focus {
   box-shadow: 0 0 0 3px rgba(193, 157, 99, 0.18);
 }
+
+.sms-consent {
+  border: 1px solid rgba(18, 22, 17, 0.08);
+  background: rgba(243, 242, 237, 0.5);
+  padding: 20px 22px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sms-consent-legend {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  padding: 0 6px;
+}
+
+.sms-consent-option {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.sms-consent-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.sms-consent-box {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border: 2px solid rgba(18, 22, 17, 0.25);
+  background: var(--bg-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sms-consent-option:hover .sms-consent-box {
+  border-color: var(--green-primary);
+}
+
+.sms-consent-option input:focus-visible + .sms-consent-box {
+  box-shadow: 0 0 0 4px rgba(87, 143, 37, 0.18);
+}
+
+.sms-consent-option input:checked + .sms-consent-box {
+  background: var(--green-primary);
+  border-color: var(--green-primary);
+}
+
+.sms-consent-option input:checked + .sms-consent-box::after {
+  content: '';
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.sms-consent-disclosure {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(18, 22, 17, 0.08);
+}
+
+.sms-consent-disclosure p {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.sms-consent-disclosure a {
+  color: var(--green-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  word-break: break-all;
+}
+

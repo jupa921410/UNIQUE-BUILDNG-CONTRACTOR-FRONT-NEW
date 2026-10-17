@@ -65,7 +65,7 @@ export function serviceHtml(template, service, siteUrl) {
     '<nav aria-label="Related services"><a href="/portfolio">View related projects</a>' +
     serviceContent.filter(item => item.id !== service.id).slice(0, 3).map(item =>
       '<a href="/services/' + escapeHtml(item.id) + '">' + escapeHtml(item.title) + '</a>').join('') + '</nav>' +
-    '<h2>Contact Unique Building Contractors</h2><a href="tel:8135237828">813-523-7828</a> ' +
+    '<h2>Contact Unique Building Contractors</h2><a href="tel:+18135237828">(813) 523-7828</a> ' +
     '<a href="mailto:sales@uniquebuildingcontractors.com">sales@uniquebuildingcontractors.com</a></article>';
   return html.replace('</head>', '<script id="ubc-service-schema" type="application/ld+json">' +
     JSON.stringify(schema).replaceAll('<', '\\u003c') + '</script>\n</head>')

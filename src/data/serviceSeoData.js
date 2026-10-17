@@ -1,9 +1,15 @@
-export const confirmedServiceAreas = [
-  'Tampa', 'Clearwater', 'St. Petersburg', 'Brandon',
-  'Wesley Chapel', 'Lutz', 'Sarasota', 'New Port Richey',
-];
+import { PHASE1_CITIES } from './serviceAreasData.js';
+
+export const confirmedServiceAreas = PHASE1_CITIES.map(({ city }) => city);
 
 export const serviceSeoData = {
+  'condo-renovations': {
+    intro: 'Condo renovations require a clear scope for the unit and coordination with the wider building. We plan finishes, access, protection and trade work together.',
+    faqs: [
+      { question: 'Do you coordinate condo building requirements?', answer: 'We review association requirements, construction hours, delivery access and shared-space protection during planning.' },
+      { question: 'Can you remodel a condo kitchen and bathroom?', answer: 'Yes. The scope is tailored to the existing layout, building systems, chosen finishes and applicable approvals.' },
+    ],
+  },
   'new-construction': {
     intro: 'Unique Building Contractors provides coordinated new-home construction across Tampa Bay, from early planning and permitting through inspections and final finishes.',
     faqs: [

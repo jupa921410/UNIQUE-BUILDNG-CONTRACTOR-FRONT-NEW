@@ -1,6 +1,7 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import logo1x from '../../assets/1x/logo.png'
+const logo1x = '/brand/logo-mini.svg';
 import hammerIcon from '../../assets/martillo.svg'
 import planBg from '../../assets/plan.jpg'
 import './Preloader.css'
@@ -73,7 +74,7 @@ export default function Preloader() {
                 ease: "easeInOut"
               }}
             >
-              <img src={hammerIcon} alt="" className="loader-hammer" />
+              <ResponsiveImage src={hammerIcon} alt="" className="loader-hammer" />
             </motion.div>
 
             {/* Logo Assembly */}

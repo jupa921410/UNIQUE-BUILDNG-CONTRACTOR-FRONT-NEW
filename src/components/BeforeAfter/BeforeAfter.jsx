@@ -1,3 +1,4 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, CheckCircle2, ArrowRight } from 'lucide-react';
@@ -37,7 +38,7 @@ export default function BeforeAfter() {
           >
             {/* After Image (Background) */}
             <div className="img-after-wrapper">
-              <img src={afterImg} alt="After remodeling" className="comp-img" />
+              <ResponsiveImage src={afterImg} alt="After remodeling" className="comp-img" />
               <div className="comp-label label-after">After</div>
             </div>
 
@@ -46,7 +47,7 @@ export default function BeforeAfter() {
               className="img-before-wrapper" 
               style={{ width: `${sliderPos}%` }}
             >
-              <img src={beforeImg} alt="Before remodeling" className="comp-img" />
+              <ResponsiveImage src={beforeImg} alt="Before remodeling" className="comp-img" />
               <div className="comp-label label-before">Before</div>
             </div>
 

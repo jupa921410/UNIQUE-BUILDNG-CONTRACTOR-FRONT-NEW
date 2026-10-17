@@ -1,3 +1,4 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { useState } from 'react';
 import './MaterialSelectionForm.css';
 
@@ -22,7 +23,7 @@ export default function MaterialSelectionForm({ selection, answers, onChange, di
                         <summary>View profile / style reference</summary>
                         <div className={section.id === 'doors' ? 'material-door-images' : ''}>
                             {references[section.id].map((url, i) => <figure key={url}>
-                                <a href={url} target="_blank" rel="noreferrer"><img src={url} alt={section.id === 'doors' ? labels[i] : section.title + ' reference'} /></a>
+                                <a href={url} target="_blank" rel="noreferrer"><ResponsiveImage src={url} alt={section.id === 'doors' ? labels[i] : section.title + ' reference'} /></a>
                                 {section.id === 'doors' && <figcaption>{labels[i]}</figcaption>}
                             </figure>)}
                         </div>
@@ -56,7 +57,7 @@ export default function MaterialSelectionForm({ selection, answers, onChange, di
 export function MaterialSignatures({ selection }) {
     return <div className="material-signatures">
         {selection.client_signed_at && <section><h3>Client signature</h3><p>{selection.client_name} · {new Date(selection.client_signed_at).toLocaleString()}</p>
-            <img src={selection.client_signature} alt="Client signature" /></section>}
+            <ResponsiveImage src={selection.client_signature} alt="Client signature" /></section>}
         {selection.staff_signed_at && <section><h3>UBC electronic signature</h3><p className="material-typed-signature">{selection.staff_name}</p>
             <p>{selection.staff_title} · {new Date(selection.staff_signed_at).toLocaleString()}</p></section>}
         {selection.status === 'submitted' && <p>Client signed. Awaiting UBC countersignature.</p>}

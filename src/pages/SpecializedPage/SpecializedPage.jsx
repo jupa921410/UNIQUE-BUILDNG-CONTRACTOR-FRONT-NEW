@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import ServiceDetail from '../../components/ServiceDetail/ServiceDetail';
 import Contact from '../../components/Contact/Contact';
 import ProcessSteps from '../../components/ProcessSteps/ProcessSteps';
+import ConceptHero from '../../components/ConceptHero/ConceptHero';
+import { projectPhotos } from '../../data/projectPresentation';
+const interior = projectPhotos.living;
 import './SpecializedPage.css';
 import SEO from '../../components/SEO/SEO';
 
@@ -18,7 +21,7 @@ export default function SpecializedPage() {
         title="Specialized Construction Services in Tampa Bay"
         description="Specialized construction planning, remodeling and project execution by licensed Tampa Bay contractors."
       />
-      <div className="page-header-spacer"></div>
+      <ConceptHero title="Extraordinary in every detail." label="Specialized renovations" description="From custom kitchens to carefully finished floors, discover the details that make your home uniquely yours." image={interior} cutout={false} />
       
       <motion.div
         initial={{ opacity: 0 }}

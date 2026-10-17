@@ -8,10 +8,18 @@
 
 Options -MultiViews -Indexes
 DirectoryIndex index.html
+DirectorySlash Off
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+  RewriteRule ^portfolio/dental-clinic-addition/?$ /portfolio/dental-clinic-addition-dunedin-fl [R=301,L]
+  RewriteRule ^portfolio/bathroom-remodel/?$ /portfolio/bathroom-remodel-st-petersburg-fl [R=301,L]
+  RewriteRule ^portfolio/remodeling-project/?$ /portfolio/remodeling-project-clearwater-beach-fl [R=301,L]
+  RewriteRule ^portfolio/complete-bathroom-remodeling/?$ /portfolio/complete-bathroom-remodeling-zephyrhills-fl [R=301,L]
+
+  # The home route is valid even before mod_dir resolves DirectoryIndex.
+  RewriteRule ^$ /index.html [L]
 
   # Never touch the shell itself (prevents a rewrite loop).
   RewriteRule ^index\.html$ - [L]
@@ -28,14 +36,26 @@ DirectoryIndex index.html
   RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
   RewriteRule ^(.+?)/?$ /$1/index.html [L]
 
+  # Only these private/transactional SPA routes may use the shell.
+  RewriteRule ^(?:portal(?:/(?:login|forgot-password|invoices|reset-password/[^/]+|projects/[^/]+))?|thank-you)/?$ /index.html [L]
+
+  # Preserve the legacy service URL as a permanent redirect.
+  RewriteRule ^service/([a-z0-9-]+)/?$ /services/$1 [R=301,L]
+  RewriteRule ^services/kitchensabdathrooms/?$ /services/kitchens-bathrooms [R=301,L]
+
+  # Unknown URLs and missing assets return a real HTTP 404.
+  RewriteRule ^ - [R=404,L]
+
   # 3. Everything else is a client-side route → hand over the SPA shell.
-  RewriteRule ^ /index.html [L]
+
 </IfModule>
 
-# 404s for unknown asset files still return the SPA shell so deep links work.
-ErrorDocument 404 /index.html
+# Serve the custom error document while preserving the HTTP 404 status.
+ErrorDocument 404 /404.html
 
 <IfModule mod_headers.c>
+  # Host-scoped: this rule cannot add noindex on www at production launch.
+  Header always set X-Robots-Tag "noindex, nofollow" "expr=%{HTTP_HOST} =~ m#(?i)^test\.[^:]+(?::[0-9]+)?$#"
   <FilesMatch "\.(js|css|woff2?|ttf|otf|eot|png|jpe?g|gif|svg|webp|avif|ico|mp4|webm)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>

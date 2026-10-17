@@ -1,3 +1,4 @@
+import { normalizeProject, apiPortfolioSlug } from '../data/portfolioRoutes.js';
 // ============================================================
 //  Showcase / Portfolio Service
 //  Centralizes all calls to the /api/showcase backend endpoint.
@@ -31,7 +32,7 @@ export async function fetchShowcaseProjects() {
   const json = await requestJson(API_ENDPOINTS.SHOWCASE_LIST);
   // API wraps data in a { data: [...] } envelope
   const projects = Array.isArray(json) ? json : json.data;
-  return Array.isArray(projects) ? projects : [];
+  return Array.isArray(projects) ? projects.map(normalizeProject) : [];
 }
 
 /**
@@ -42,8 +43,8 @@ export async function fetchShowcaseProjects() {
  * @returns {Promise<Object>} Full project object
  */
 export async function fetchShowcaseProject(slug) {
-  const json = await requestJson(API_ENDPOINTS.SHOWCASE_DETAIL(encodeURIComponent(slug)));
-  return json.data ?? json;
+  const json = await requestJson(API_ENDPOINTS.SHOWCASE_DETAIL(encodeURIComponent(apiPortfolioSlug(slug))));
+  return normalizeProject(json.data ?? json);
 }
 
 /**

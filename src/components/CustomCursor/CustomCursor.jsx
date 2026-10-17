@@ -1,3 +1,4 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import martilloSvg from '../../assets/martillo.svg';
@@ -59,7 +60,7 @@ export default function CustomCursor() {
         scale: { duration: 0.15 }
       }}
     >
-      <img src={martilloSvg} alt="" className="custom-cursor-hammer" aria-hidden="true" style={{ width: '35px', height: '100px' }} />
+      <ResponsiveImage src={martilloSvg} alt="" className="custom-cursor-hammer" aria-hidden="true" style={{ width: '35px', height: '100px' }} />
     </motion.div>
   );
 }

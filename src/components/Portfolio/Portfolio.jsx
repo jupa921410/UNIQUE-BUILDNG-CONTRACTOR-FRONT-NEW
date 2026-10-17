@@ -1,3 +1,4 @@
+import ResponsiveImage from '../ResponsiveImage';
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -5,14 +6,12 @@ import { motion } from 'framer-motion';
 import {
   ArrowUpRight,
   MapPin,
-  CalendarRange,
   AlertCircle,
 } from 'lucide-react';
-import logoMark from '../../assets/1x/logo.png';
+const logoMark = '/brand/logo-mini.svg';
 import {
   fetchShowcaseProjects,
   getPrimaryImage,
-  formatCompletionDate,
 } from '../../services/showcaseService';
 import './Portfolio.css';
 
@@ -50,9 +49,9 @@ function ProjectCard({ project, index }) {
     >
       <div className="portfolio-card-image-wrap">
         {imgUrl ? (
-          <img
+          <ResponsiveImage
             src={imgUrl}
-            alt={project.title}
+            alt={`${project.title}, ${project.location || "Tampa Bay FL"}`}
             className="portfolio-card-image"
             loading="lazy"
           />
@@ -80,12 +79,6 @@ function ProjectCard({ project, index }) {
           <span className="portfolio-card-location">
             <MapPin size={14} /> {project.location}
           </span>
-          {project.completion_date && (
-            <span className="portfolio-card-date">
-              <CalendarRange size={14} />
-              {formatCompletionDate(project.completion_date)}
-            </span>
-          )}
           <Link
             to={`/portfolio/${project.slug}`}
             className="portfolio-card-link"
@@ -130,7 +123,7 @@ export default function Portfolio() {
 
   return (
     <section className="portfolio section" id="portfolio">
-      <img
+      <ResponsiveImage
         src={logoMark}
         alt=""
         className="portfolio-brand-mark"
@@ -196,8 +189,8 @@ export default function Portfolio() {
         {/* â”€â”€ CTA â”€â”€ */}
         {!loading && !error && (
           <div className="portfolio-view-all">
-            <Link to="/portfolio" className="portfolio-cta">
-              View All Projects
+            <Link to="/portfolio" className="portfolio-cta design-button">
+              View all projects
               <ArrowUpRight size={18} />
             </Link>
           </div>

@@ -1,0 +1,1 @@
+var e=`https://admin.uniquebuildingcontractors.com`,t={CONTACT_FORM:`${e}/api/contact`,SHOWCASE_LIST:`${e}/api/showcase`,SHOWCASE_DETAIL:t=>`${e}/api/showcase/slug/${t}`},n=`${e}/api/client`;export{n,t};

@@ -1,8 +1,9 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { NavHashLink } from 'react-router-hash-link';
 import { ArrowRight } from 'lucide-react';
-import logoMark from '../../assets/1x/logo.png';
+const logoMark = '/brand/logo-mini.svg';
 import { servicesData } from '../../data/servicesData';
 import './Services.css';
 
@@ -28,7 +29,7 @@ const itemVariants = {
 export default function Services() {
   return (
     <section className="services section section-dark-800" id="services">
-      <img src={logoMark} alt="" className="services-brand-mark" aria-hidden="true" />
+      <ResponsiveImage src={logoMark} alt="" className="services-brand-mark" aria-hidden="true" />
       <div className="container">
         {/* Header */}
         <motion.div 
@@ -78,7 +79,7 @@ export default function Services() {
 
                 {/* Back Side */}
                 <div className="flip-card-back">
-                  <img src={svc.image} alt={svc.title} className="back-img" />
+                  <ResponsiveImage src={svc.image} alt={svc.title} className="back-img" />
                   <div className="back-overlay"></div>
                   <div className="back-content">
                     <h3 className="back-title">{svc.title}</h3>

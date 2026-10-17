@@ -1,0 +1,9 @@
+.faq-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(32px,6vw,96px);scroll-margin-top:120px}
+.faq-intro h2{font-size:clamp(30px,3vw,44px);line-height:1.18;font-weight:400;margin-bottom:20px}
+.faq-intro p{line-height:1.9;margin-bottom:28px;max-width:38ch}
+.faq-answers details{border-bottom:1px solid #11203330;padding:22px 0}
+.faq-answers details:first-child{border-top:1px solid #11203330}
+.faq-answers summary{cursor:pointer;font-size:17px;font-weight:600;line-height:1.6;padding-right:12px}
+.faq-answers details p{margin:18px 0 0;line-height:1.9;max-width:70ch}
+.faq-more{margin-top:32px;line-height:1.9}.faq-more a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:760px){.faq-content{grid-template-columns:1fr}.faq-intro p{max-width:none}}

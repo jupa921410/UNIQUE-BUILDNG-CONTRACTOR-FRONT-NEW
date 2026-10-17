@@ -1,0 +1,8 @@
+// Neighborhoods and coastal communities requested in addition to the original service areas.
+export const additionalAreas = [
+  { slug: 'st-pete-beach-fl', city: 'St. Pete Beach', context: 'Beachfront condominiums and coastal homes need careful planning for building access, moisture exposure and durable finishes.', focus: 'Coordinate condo association approval, delivery access and protection of shared spaces before work begins.' },
+  { slug: 'clearwater-beach-fl', city: 'Clearwater Beach', context: 'Clearwater Beach renovations often involve waterfront condos, vacation residences and limited staging space.', focus: 'Plan material deliveries, elevator reservations and construction hours with building management.' },
+  { slug: 'belleair-fl', city: 'Belleair', context: 'Established Belleair homes benefit from renovations that connect updated interiors with the scale and character of the existing property.', focus: 'Evaluate existing systems, room transitions and finish selections before defining a whole-home renovation scope.' },
+  { slug: 'south-tampa-fl', city: 'South Tampa', context: 'South Tampa includes older homes and newer residences with different structural layouts, utilities and renovation needs.', focus: 'Review the existing structure and site conditions before planning kitchen changes, bathroom updates or added living space.' },
+  { slug: 'davis-islands-fl', city: 'Davis Islands', context: 'Davis Islands homeowners often balance coastal conditions with the character of established island residences.', focus: 'Discuss moisture-resistant materials, existing building conditions and any applicable site restrictions during project planning.' },
+];

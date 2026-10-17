@@ -1,8 +1,9 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
-import hero2 from '../../assets/hero2.png';
-import hero3 from '../../assets/hero3.png';
-import flooringImg from '../../assets/flooring.png';
+import hero2 from '../../assets/redesign/interior.webp';
+import hero3 from '../../assets/redesign/bathroom.webp';
+import flooringImg from '../../assets/redesign/flooring.webp';
 import './ServiceDetail.css';
 
 const details = [
@@ -95,7 +96,7 @@ export default function ServiceDetail() {
                 transition={{ duration: 0.8 }}
               >
                 <div className="detail-image-frame">
-                  <img src={item.image} alt={item.tag} className="detail-img" />
+                  <ResponsiveImage src={item.image} alt={item.tag} className="detail-img" />
                   <div className={`detail-tag-badge ${item.accent}`}>{item.tag}</div>
                 </div>
               </motion.div>

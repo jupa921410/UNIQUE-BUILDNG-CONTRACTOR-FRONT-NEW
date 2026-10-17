@@ -1,5 +1,12 @@
 export const serviceContent = [
   {
+    id: 'condo-renovations', title: 'Condo Renovations', subtitle: 'Thoughtful updates for condo living',
+    desc: 'Condo renovations in Tampa Bay, FL, including kitchens, bathrooms and flooring. Coordinate building access, association requirements and finishes with our team.',
+    fullDesc: 'A condo renovation begins with the unit and the building around it. We review your goals, existing layout, building rules and material selections before defining the work.\n\nOur team coordinates kitchen, bathroom and flooring improvements, including delivery access, shared-space protection, trade scheduling and applicable permit requirements. Building management and association approvals are addressed as part of project planning.',
+    tags: ['Condo Kitchens', 'Bathrooms', 'Flooring', 'Building Coordination'],
+    highlights: ['Kitchen and bathroom renovations', 'Flooring and finish coordination', 'Building access and delivery planning', 'Shared-space protection', 'Applicable permits and inspections', 'Association requirements review'],
+  },
+  {
     id: 'new-construction',
     title: 'New Construction',
     subtitle: 'Built from the ground up',

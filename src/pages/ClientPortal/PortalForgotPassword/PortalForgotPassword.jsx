@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Mail, AlertCircle, CheckCircle2 } from 'lucide-react';
 import * as portalApi from '../../../services/portalApi';
 import SEO from '../../../components/SEO/SEO';
-import logo from '../../../assets/1x/logo.png';
+import BrandLogo from '../../../components/BrandLogo/BrandLogo';
 import '../PortalLogin/PortalAuth.css';
 
 export default function PortalForgotPassword() {
@@ -28,7 +28,7 @@ export default function PortalForgotPassword() {
     <div className="portal-auth-page">
       <SEO title="Reset Password" description="Reset your Unique Building Contractors client portal password." noindex />
       <div className="portal-auth-card">
-        <img src={logo} alt="Unique Building Contractors" className="portal-auth-logo" />
+        <div className="portal-auth-brand"><BrandLogo /></div>
         <h1>Reset Password</h1>
         <p className="portal-auth-sub">Enter your account email and we&apos;ll send you a link to set a new password.</p>
 

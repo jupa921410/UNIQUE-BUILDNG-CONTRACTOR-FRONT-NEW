@@ -130,7 +130,7 @@ export default function Process() {
         <div className="trust-bar glass-card">
           <div className="trust-bar-item">
             <span className="trust-bar-icon">📞</span>
-            <span>Call Now: <strong>813-523-7828</strong></span>
+            <span>Call Now: <strong>(813) 523-7828</strong></span>
           </div>
           <div className="trust-bar-divider"></div>
           <div className="trust-bar-item">

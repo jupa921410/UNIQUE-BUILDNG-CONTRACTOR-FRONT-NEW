@@ -1,3 +1,4 @@
+import ResponsiveImage from '../../../../components/ResponsiveImage';
 import { MapPin, User, Calendar, TrendingUp } from 'lucide-react';
 
 const fmtDate = (d) => (d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—');
@@ -71,7 +72,7 @@ export default function OverviewTab({ project }) {
           <div className="portal-progress-feed">
             {project.progress_updates.slice(0, 6).map((u) => (
               <div key={u.id} className="portal-progress-feed-item">
-                {u.images?.[0]?.url && <img src={u.images[0].url} alt={u.title} />}
+                {u.images?.[0]?.url && <ResponsiveImage src={u.images[0].url} alt={u.title} />}
                 <div>
                   <p className="portal-progress-feed-title">{u.title}</p>
                   <p className="portal-progress-feed-date">{fmtDate(u.recorded_at)}</p>

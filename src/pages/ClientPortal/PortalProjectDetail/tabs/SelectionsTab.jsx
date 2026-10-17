@@ -1,3 +1,4 @@
+import ResponsiveImage from '../../../../components/ResponsiveImage';
 import { useEffect, useState } from 'react';
 import { AlertCircle, CheckCircle2, Palette } from 'lucide-react';
 import * as portalApi from '../../../../services/portalApi';
@@ -110,7 +111,7 @@ function SelectionAreaCard({ area, onUpdate }) {
               title="Optional exact color"
             />
           )}
-          {item.reference_image_url && <img src={item.reference_image_url} alt="" className="portal-selection-thumb" />}
+          {item.reference_image_url && <ResponsiveImage src={item.reference_image_url} alt="" className="portal-selection-thumb" />}
           {!isConfirmed && (
             <label style={{ fontSize: '0.72rem', color: 'var(--green-dark)', cursor: 'pointer', fontWeight: 700 }}>
               +photo

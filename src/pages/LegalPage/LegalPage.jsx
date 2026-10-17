@@ -14,7 +14,7 @@ const content = {
 export default function LegalPage({ type }) {
   const page = content[type];
   return (
-    <main className="section" style={{ minHeight: '70vh', paddingTop: '180px' }}>
+    <main className="section legal-page" style={{ minHeight: '70vh', paddingTop: '180px' }}>
       <SEO title={page.title} description={page.description} />
       <div className="container" style={{ maxWidth: '850px' }}>
         <h1 className="section-title">{page.title}</h1>

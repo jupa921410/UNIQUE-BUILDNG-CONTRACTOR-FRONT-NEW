@@ -1,3 +1,4 @@
+import ResponsiveImage from '../../components/ResponsiveImage';
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -5,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowUpRight,
   MapPin,
-  CalendarRange,
   Ruler,
   DollarSign,
   Search,
@@ -18,11 +18,10 @@ import {
   Clock,
   Sparkles,
 } from 'lucide-react';
-import logoMark from '../../assets/1x/logo.png';
+import ConceptHero from '../../components/ConceptHero/ConceptHero';
 import {
   fetchShowcaseProjects,
   getPrimaryImage,
-  formatCompletionDate,
 } from '../../services/showcaseService';
 import './PortfolioPage.css';
 import SEO from '../../components/SEO/SEO';
@@ -87,9 +86,9 @@ function ProjectCard({ project }) {
       <Link to={`/portfolio/${project.slug}`} className="pp-card-inner">
         <div className="pp-card-img-wrap">
           {imgUrl ? (
-            <img
+            <ResponsiveImage
               src={imgUrl}
-              alt={project.title}
+              alt={`${project.title}, ${project.location || "Tampa Bay FL"}`}
               className="pp-card-img"
               loading="lazy"
             />
@@ -126,12 +125,6 @@ function ProjectCard({ project }) {
             {project.location && (
               <span>
                 <MapPin size={13} /> {project.location}
-              </span>
-            )}
-            {project.completion_date && (
-              <span>
-                <CalendarRange size={13} />
-                {formatCompletionDate(project.completion_date)}
               </span>
             )}
             {project.square_feet && (
@@ -226,29 +219,10 @@ export default function PortfolioPage() {
         description="Explore completed home construction, remodeling, kitchen, bathroom and flooring projects by Unique Building Contractors across Tampa Bay."
       />
       {/* â”€â”€ Hero banner â”€â”€ */}
-      <section className="pp-hero">
-        <img src={logoMark} alt="" className="pp-hero-mark" aria-hidden="true" />
-        <div className="container">
-          <motion.div
-            className="pp-hero-content"
-            initial={{ opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.78, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="section-badge">Our Portfolio</div>
-            <h1 className="section-title">
-              All <span>Projects</span>
-            </h1>
-            <p className="section-subtitle">
-              Browse our complete collection of completed projects — from luxury
-              residential renovations to commercial build-outs across Tampa Bay.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <ConceptHero title="Crafted spaces. Real stories." label="Our portfolio" description="Explore our completed construction and renovation projects across Tampa Bay. See the spaces, details and craftsmanship behind each project." cta="Explore the projects" to="/portfolio#project-collection" />
 
       {/* â”€â”€ Filters â”€â”€ */}
-      <section className="pp-filters-bar">
+      <section className="pp-filters-bar" id="project-collection">
         <div className="container pp-filters-inner">
           {/* Category chips */}
           <div className="pp-category-chips" role="group" aria-label="Filter by category">

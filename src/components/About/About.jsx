@@ -1,7 +1,8 @@
+import ResponsiveImage from '../ResponsiveImage';
 import { motion } from 'framer-motion';
 import { Target, Lightbulb, Handshake, ShieldCheck, ArrowRight, Phone, MapPin } from 'lucide-react';
 import aboutImg from '../../assets/about.png';
-import logo1x from '../../assets/1x/logo.png';
+const logo1x = '/brand/logo-mini.svg';
 import './About.css';
 
 const values = [
@@ -31,7 +32,7 @@ export default function About() {
   return (
     <section className="about section section-dark" id="about">
       {/* Background Logo */}
-      <img src={logo1x} alt="" className="about-bg-logo" aria-hidden="true" />
+      <ResponsiveImage src={logo1x} alt="" className="about-bg-logo" aria-hidden="true" />
 
       <div className="container">
         <div className="about-grid">
@@ -44,7 +45,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
           >
             <div className="about-image-container">
-              <img src={aboutImg} alt="Unique Building Contractors team at work" className="about-img" />
+              <ResponsiveImage src={aboutImg} alt="Unique Building Contractors team at work" className="about-img" />
               {/* Floating badge */}
               <motion.div
                 className="about-badge"
@@ -152,9 +153,9 @@ export default function About() {
                 Free Consultation
                 <ArrowRight size={20} />
               </a>
-              <a href="tel:8135237828" className="btn btn-secondary">
+              <a href="tel:+18135237828" className="btn btn-secondary">
                 <Phone size={20} className="text-green" />
-                813-523-7828
+                (813) 523-7828
               </a>
             </motion.div>
           </div>

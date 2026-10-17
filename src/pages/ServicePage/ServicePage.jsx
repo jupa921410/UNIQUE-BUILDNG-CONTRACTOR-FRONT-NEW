@@ -1,9 +1,10 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, CheckCircle2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { servicesData } from '../../data/servicesData';
 import Contact from '../../components/Contact/Contact';
 import ProcessSteps from '../../components/ProcessSteps/ProcessSteps';
+import ConceptHero from '../../components/ConceptHero/ConceptHero';
 import './ServicePage.css';
 import SEO, { breadcrumbSchema, faqSchema, serviceSchema, SITE_URL } from '../../components/SEO/SEO';
 import { confirmedServiceAreas, serviceSeoData } from '../../data/serviceSeoData';
@@ -38,28 +39,7 @@ export default function ServicePage() {
           faqSchema(seo.faqs),
         ]}
       />
-      <section className="service-hero">
-        <div className="service-hero-bg">
-          <img src={service.image} alt={service.title} />
-          <div className="service-hero-overlay"></div>
-        </div>
-        
-        <div className="container service-hero-content">
-          <Link to="/" className="back-link">
-            <ArrowLeft size={20} />
-            Back to Home
-          </Link>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="section-badge">{service.subtitle}</div>
-            <h1 className="service-page-title">{service.title}</h1>
-          </motion.div>
-        </div>
-      </section>
+      <ConceptHero title={service.title} label={service.subtitle} description={service.desc} image={service.image} cutout={false} imageAlt={service.title + " project in Tampa Bay, FL"} />
 
       <section className="service-details-section section">
         <div className="container">
@@ -71,7 +51,7 @@ export default function ServicePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="detail-heading">Precision Excellence</h2>
+              <h2 className="detail-heading">Considered from start to finish</h2>
               <div className="detail-full-desc">
                 {service.fullDesc.split('\n\n').map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>

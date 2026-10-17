@@ -81,9 +81,9 @@ export default function ThankYouPage() {
             </div>
 
             <div className="ty-actions">
-              <a href="tel:8135237828" className="btn btn-primary">
+              <a href="tel:+18135237828" className="btn btn-primary">
                 <Phone size={18} />
-                Call UBC Now — 813-523-7828
+                Call UBC Now — (813) 523-7828
               </a>
               <Link to="/" className="btn btn-secondary">
                 Back to Home
