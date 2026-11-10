@@ -3,15 +3,14 @@ import { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowLeft, ArrowRight, MapPin, ShieldCheck, Ruler, Pause, Play } from 'lucide-react';
-import { projectPhotos } from '../../data/projectPresentation';
-const villa = projectPhotos.home;
-const interior = projectPhotos.kitchen;
-const exterior = projectPhotos.bathroom;
+import villa from '../../assets/redesign/villa.png';
+import interior from '../../assets/redesign/kitchen-cutout.png';
+import bathroom from '../../assets/redesign/bathroom-cutout.png';
 import './Hero.css';
 const scenes = [
-  { image: villa, title: 'Your vision. Beautifully built.', name: 'Custom homes', detail: 'A home designed around your life.', href: 'new-construction', cutout: false },
-  { image: interior, title: 'Rediscover the art of home.', name: 'Kitchen & bath', detail: 'Considered materials. Thoughtful details.', href: 'kitchens-bathrooms', cutout: false },
-  { image: exterior, title: 'Considered in every detail.', name: 'Bathroom remodeling', detail: 'Comfort and craftsmanship in every finish.', href: 'kitchens-bathrooms', cutout: false },
+  { image: villa, title: 'Your vision. Beautifully built.', name: 'Custom homes', detail: 'A home designed around your life.', href: 'new-construction', cutout: true },
+  { image: interior, title: 'Rediscover the art of home.', name: 'Kitchen & bath', detail: 'Considered materials. Thoughtful details.', href: 'kitchens-bathrooms', cutout: true },
+  { image: bathroom, title: 'Considered in every detail.', name: 'Bathroom remodeling', detail: 'Comfort and craftsmanship in every finish.', href: 'kitchens-bathrooms', cutout: true },
 ];
 export default function Hero() {
   const [current, setCurrent] = useState(0);
@@ -38,7 +37,7 @@ export default function Hero() {
       <p key={`copy-${current}`} className="hero-text-enter hero-copy-enter">{scene.detail} A dedicated construction team to bring your ideas to life, down to the last detail.</p>
       <div className="architecture-actions"><Link to="/#contact" className="design-button gold">Start your project <ArrowUpRight size={19}/></Link><Link to="/portfolio" className="hero-work-link">Discover our work <ArrowUpRight size={18}/></Link></div>
     </div>
-    <div className="architecture-art"><div key={scene.image} className="hero-art-enter"><ResponsiveImage src={scene.image} alt={scene.name + ' project in Tampa Bay'} fetchPriority="high"/></div><span className="hero-concept-label">Project gallery</span></div>
+    <div className="architecture-art"><div key={scene.image} className="hero-art-enter"><ResponsiveImage src={scene.image} alt={scene.cutout ? 'Architectural concept: ' + scene.name : scene.name + ' project in Tampa Bay'} fetchPriority="high"/></div><span className="hero-concept-label">{scene.cutout ? 'Architectural inspiration' : 'Project gallery'}</span></div>
     <div className="hero-discipline"><span>Design.</span><span>Detail.</span><span>Build.</span></div>
     <div className="architecture-bottom">
       <Link to={`/services/${scene.href}`} className="hero-feature"><div className="hero-feature-image"><ResponsiveImage src={scene.image} alt=""/></div><div><span>Explore the possibilities</span><h2>{scene.name}</h2><p>{scene.detail}</p></div><ArrowUpRight size={23}/></Link>

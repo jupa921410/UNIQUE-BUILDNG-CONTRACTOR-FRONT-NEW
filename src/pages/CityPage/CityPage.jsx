@@ -2,7 +2,9 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, CheckCircle2, ArrowRight, Phone, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchShowcaseProjects } from '../../services/showcaseService';
+import { projectCity, projectsForArea } from '../../data/projectContent';
 import SEO, { cityPageSchema } from '../../components/SEO/SEO';
 import { getCityData, getNearbyAreas } from '../../data/serviceAreasData';
 import Contact from '../../components/Contact/Contact';
@@ -65,6 +67,15 @@ function TestimonialCard({ testimonial }) {
 export default function CityPage() {
   const { citySlug } = useParams();
   const cityData = getCityData(citySlug);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchShowcaseProjects()
+      .then((list) => { if (!cancelled) setProjects(list); })
+      .catch(() => { /* The prerendered list stays visible without JS data. */ });
+    return () => { cancelled = true; };
+  }, []);
 
   if (!cityData) {
     return <NotFoundPage />;
@@ -191,6 +202,16 @@ export default function CityPage() {
                   region. Visit our portfolio for examples of recent work — and check
                   back as we add new completed projects.
                 </div>
+                {/* Filled at build time by scripts/generate-project-seo.mjs and at runtime from the API. */}
+                <ul className="cp-projects-list" data-city-projects="true">
+                  {projectsForArea(projects, slug).list.map(project => (
+                    <li key={project.slug}>
+                      <Link to={`/portfolio/${project.slug}`}>
+                        {project.title}{projectCity(project) ? ` — ${projectCity(project)}, FL` : ''}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
                 <Link to="/portfolio" className="cp-projects-link">
                   View Portfolio <ArrowRight size={14} />
                 </Link>

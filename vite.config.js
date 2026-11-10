@@ -7,15 +7,20 @@ import { businessSchema } from './src/data/businessSchema.js'
 // Resolve image imports to prepared responsive files, keeping full-size masters
 // out of the production bundle. Preparation runs before the build.
 function optimizedImages() {
+  let isBuild = false;
   let images = {};
   try { images = JSON.parse(readFileSync('.cache/local-images.json', 'utf8')); } catch { /* First dev run can use source images. */ }
   return {
     name: 'ubc-optimized-images', enforce: 'pre',
+    configResolved(config) {
+      isBuild = config.command === 'build';
+    },
     transformIndexHtml(html) {
       return html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/, (_, open, value, close) =>
         open + JSON.stringify(JSON.parse(value).map(item => item['@id'] === businessSchema['@id'] ? businessSchema : item)) + close);
     },
     resolveId(source, importer) {
+      if (!isBuild) return;
       if (!importer || !source.startsWith('.') || !/\.(png|jpe?g|webp)$/.test(source)) return;
       const image = images[resolve(dirname(importer), source)];
       if (image) return '\0ubc-image:' + image.src;
@@ -24,6 +29,7 @@ function optimizedImages() {
       if (id.startsWith('\0ubc-image:')) return `export default ${JSON.stringify(id.slice('\0ubc-image:'.length))};`;
     },
     transform(code, id) {
+      if (!isBuild) return;
       if (!id.endsWith('.css')) return;
       return code.replace(/url\(['"]?(\.[^)'"\s]+)['"]?\)/g, (full, source) => {
         const image = images[resolve(dirname(id), source)];

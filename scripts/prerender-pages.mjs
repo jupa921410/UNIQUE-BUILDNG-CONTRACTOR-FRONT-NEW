@@ -14,7 +14,7 @@ export async function writePrerenderedPages(root, dist, template) {
       let html = template.replace(/<title>[^<]*<\/title>/i, `<title>${escape(page.title)}</title>`)
         .replace(/<link\s+rel="canonical"[^>]*>/i, `<link rel="canonical" href="${escape(page.canonical)}" />`)
         .replace(/<div id="root">[\s\S]*?<\/div>/, () => `<div id="root">${page.content}</div>`);
-      for (const [key, value] of Object.entries({ description: page.description, 'og:title': page.title, 'og:description': page.description, 'og:url': page.canonical, 'twitter:title': page.title, 'twitter:description': page.description, 'twitter:url': page.canonical, ...(page.noindex ? { robots: 'noindex, nofollow' } : {}) })) {
+      for (const [key, value] of Object.entries({ description: page.description, 'og:title': page.title, 'og:description': page.description, 'og:url': page.canonical, 'og:type': page.type, 'og:image': page.image, 'twitter:image': page.image, 'twitter:title': page.title, 'twitter:description': page.description, 'twitter:url': page.canonical, ...(page.noindex ? { robots: 'noindex, nofollow' } : {}) })) {
         html = html.replace(new RegExp(`<meta\\s+(?:name|property)="${key}"[^>]*>`, 'i'), match => match.replace(/content="[^"]*"/, () => `content="${escape(value)}"`));
       }
       const output = page.path === '/404' ? join(dist, '404.html') : join(dist, page.path.slice(1), 'index.html');

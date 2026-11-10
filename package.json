@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/prepare-assets.mjs && vite build && node scripts/generate-project-seo.mjs",
+    "build": "node scripts/prepare-assets.mjs && vite build && node scripts/generate-project-seo.mjs && node scripts/check-seo.mjs",
     "lint": "eslint .",
+    "check:seo": "node scripts/check-seo.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

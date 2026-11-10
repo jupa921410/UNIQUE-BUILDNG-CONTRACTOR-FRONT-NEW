@@ -1,3 +1,4 @@
+import Financing from '../src/pages/FinancingPage/FinancingPage.jsx';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
@@ -13,6 +14,7 @@ import NotFound from '../src/pages/NotFoundPage/NotFoundPage.jsx';
 
 export function renderPages() {
   const pages = [
+    ['/financing', Financing],
     ['/aboutus', About], ['/service-areas', Areas], ['/specialized', Specialized],
     ['/resources', Resources], ['/privacy', Legal, { type: 'privacy' }],
     ['/terms', Legal, { type: 'terms' }], ['/404', NotFound],

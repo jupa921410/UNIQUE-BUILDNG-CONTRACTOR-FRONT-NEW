@@ -149,7 +149,7 @@ function ProjectCard({ project }) {
 // â”€â”€ Main page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export default function PortfolioPage() {
   const [projects, setProjects] = useState([]);
-  const [filtered, setFiltered] = useState([]);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState('all');
@@ -166,7 +166,6 @@ export default function PortfolioPage() {
       .then((data) => {
         if (!cancelled) {
           setProjects(data);
-          setFiltered(data);
         }
       })
       .catch((err) => {
@@ -179,8 +178,8 @@ export default function PortfolioPage() {
     return () => { cancelled = true; };
   }, []);
 
-  // Filter whenever category, status or search changes
-  useEffect(() => {
+  // Derive results directly so filters and pagination update together.
+  const filtered = (() => {
     let result = projects;
     if (activeCategory !== 'all') {
       result = result.filter((p) => p.category === activeCategory);
@@ -198,8 +197,16 @@ export default function PortfolioPage() {
           p.description?.toLowerCase().includes(q)
       );
     }
-    setFiltered(result);
-  }, [projects, activeCategory, activeStatus, search]);
+    return result;
+  })();
+  const totalPages = Math.max(1, Math.ceil(filtered.length / 6));
+  const currentPage = Math.min(page, totalPages);
+  const pageStart = (currentPage - 1) * 6;
+  const visibleProjects = filtered.slice(pageStart, pageStart + 6);
+  const changePage = (nextPage) => {
+    setPage(nextPage);
+    document.getElementById('project-collection')?.scrollIntoView({ block: 'start' });
+  };
 
   // Build unique categories from data for the filter bar
   const dynamicCategories = [
@@ -231,7 +238,7 @@ export default function PortfolioPage() {
                 key={cat.key}
                 id={`filter-${cat.key}`}
                 className={`pp-chip ${activeCategory === cat.key ? 'active' : ''}`}
-                onClick={() => setActiveCategory(cat.key)}
+                onClick={() => { setActiveCategory(cat.key); setPage(1); }}
               >
                 {cat.icon}
                 {cat.label}
@@ -253,7 +260,7 @@ export default function PortfolioPage() {
                 key={s.key}
                 id={`status-filter-${s.key}`}
                 className={`pp-chip pp-chip-status ${activeStatus === s.key ? 'active' : ''} ${s.key !== 'all' ? STATUS_CONFIG[s.key]?.className ?? '' : ''}`}
-                onClick={() => setActiveStatus(s.key)}
+                onClick={() => { setActiveStatus(s.key); setPage(1); }}
               >
                 {s.icon}
                 {s.label}
@@ -269,7 +276,7 @@ export default function PortfolioPage() {
               type="search"
               placeholder="Search projects…"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
               className="pp-search-input"
               aria-label="Search projects"
             />
@@ -284,14 +291,15 @@ export default function PortfolioPage() {
           {!loading && !error && (
             <motion.p
               className="pp-result-count"
+              role="status"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
             >
               <SlidersHorizontal size={15} />
-              {filtered.length === projects.length
-                ? `${projects.length} project${projects.length !== 1 ? 's' : ''}`
-                : `${filtered.length} of ${projects.length} projects`}
+              {filtered.length > 0
+                ? `Showing ${pageStart + 1}–${Math.min(pageStart + 6, filtered.length)} of ${filtered.length} projects`
+                : '0 projects'}
             </motion.p>
           )}
 
@@ -306,7 +314,7 @@ export default function PortfolioPage() {
           {/* Grid */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${activeCategory}-${search}`}
+              key={`${activeCategory}-${activeStatus}-${search}-${currentPage}`}
               className="pp-grid"
               variants={stagger}
               initial="hidden"
@@ -316,7 +324,7 @@ export default function PortfolioPage() {
               {loading
                 ? [0, 1, 2, 3, 4, 5].map((i) => <SkeletonCard key={i} />)
                 : filtered.length > 0
-                ? filtered.map((p) => <ProjectCard key={p.id} project={p} />)
+                ? visibleProjects.map((p) => <ProjectCard key={p.id} project={p} />)
                 : !error && (
                     <motion.div
                       className="pp-empty"
@@ -324,7 +332,7 @@ export default function PortfolioPage() {
                     >
                       <span>No projects match your filter.</span>
                       <button
-                        onClick={() => { setActiveCategory('all'); setActiveStatus('all'); setSearch(''); }}
+                        onClick={() => { setActiveCategory('all'); setActiveStatus('all'); setSearch(''); setPage(1); }}
                         className="pp-reset-btn"
                       >
                         Reset Filters
@@ -333,6 +341,20 @@ export default function PortfolioPage() {
                   )}
             </motion.div>
           </AnimatePresence>
+          {!loading && !error && filtered.length > 0 && (
+            <nav className="pp-pagination" aria-label="Portfolio pages">
+              <button type="button" disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>Previous</button>
+              {Array.from({ length: totalPages }, (_, index) => index + 1)
+                .filter(number => number === 1 || number === totalPages || Math.abs(number - currentPage) <= 1)
+                .map((number, index, numbers) => (
+                  <span className="pp-pagination-item" key={number}>
+                    {index > 0 && number - numbers[index - 1] > 1 && <span aria-hidden="true">…</span>}
+                    <button type="button" aria-label={`Page ${number}`} aria-current={number === currentPage ? 'page' : undefined} onClick={() => changePage(number)}>{number}</button>
+                  </span>
+                ))}
+              <button type="button" disabled={currentPage === totalPages} onClick={() => changePage(currentPage + 1)}>Next</button>
+            </nav>
+          )}
         </div>
       </section>
 

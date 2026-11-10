@@ -689,3 +689,8 @@
     padding: 18px 4px;
   }
 }
+
+/* Project links injected into "Recent Projects Near {city}" */
+.cp-projects-list { list-style: none; margin: 0.75rem 0; padding: 0; display: grid; gap: 0.4rem; }
+.cp-projects-list:empty { display: none; }
+.cp-projects-list a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }

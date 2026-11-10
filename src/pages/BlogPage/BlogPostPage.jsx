@@ -2,7 +2,7 @@ import ResponsiveImage from '../../components/ResponsiveImage';
 import { Link, useParams } from 'react-router-dom';
 import SEO, { breadcrumbSchema, SITE_URL } from '../../components/SEO/SEO';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import { blogPosts, getBlogPost } from '../../data/blogPosts';
+import { blogPosts, getBlogPost, formatBlogDate } from '../../data/blogPosts';
 import { getCityData } from '../../data/serviceAreasData';
 import './BlogPage.css';
 
@@ -19,7 +19,7 @@ export default function BlogPostPage() {
       breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }, { name: post.title, path: `/blog/${post.slug}` }]),
     ]} />
     <article>
-      <header className="blog-heading blog-post-heading container"><nav aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true"> / </span><Link to="/blog">Journal</Link></nav><p className="blog-eyebrow">{post.category}</p><h1>{post.title}</h1><p className="blog-byline">By <Link to="/aboutus">{post.author}</Link> · <time dateTime={post.date}>October 15, 2026</time> · {post.readingMinutes} min read</p></header>
+      <header className="blog-heading blog-post-heading container"><nav aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true"> / </span><Link to="/blog">Journal</Link></nav><p className="blog-eyebrow">{post.category}</p><h1>{post.title}</h1><p className="blog-byline">By <Link to="/aboutus">{post.author}</Link> · <time dateTime={post.date}>{formatBlogDate(post.date)}</time> · {post.readingMinutes} min read</p></header>
       <figure className="container blog-cover"><ResponsiveImage src={`/blog/images/${post.image}.webp`} alt={`Architectural concept for ${post.title.toLowerCase()}`} width="960" height="640" fetchPriority="high" /><figcaption>Architectural inspiration. This image is a concept, not a documented project.</figcaption></figure>
       <div className="container blog-article-layout">
         <aside className="blog-toc"><h2>In this guide</h2><nav aria-label="Article contents">{post.sections.map((section, index) => <a key={section.heading} href={`#section-${index + 1}`}>{section.heading}</a>)}<a href="#planning-checklist">Planning checklist</a><a href="#common-questions">Common questions</a></nav></aside>

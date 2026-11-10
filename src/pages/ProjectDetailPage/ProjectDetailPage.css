@@ -488,3 +488,8 @@
     padding: 24px 20px;
   }
 }
+
+/* Overview bullet lists and related links */
+.pdp-scope-list, .pdp-related-list { margin: 0.75rem 0 1rem; padding-left: 1.2rem; display: grid; gap: 0.35rem; }
+.pdp-related-list a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.pdp-related { margin-top: 1.5rem; }

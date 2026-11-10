@@ -1,3 +1,6 @@
+import { floridaConstructionPosts } from './floridaConstructionPosts.js';
+import { tampaConstructionPosts } from './tampaConstructionPosts.js';
+
 const county = { title: 'Hillsborough County: residential alterations', url: 'https://hcfl.gov/businesses/hillsgovhub/residential-and-mobile-home-checklists/residential-alterations-renovations' };
 const city = { title: 'City of Tampa: residential permits', url: 'https://www.tampa.gov/construction-services/residential-permits' };
 const license = { title: 'Florida DBPR: how to verify a license', url: 'https://www2.myfloridalicense.com/how-to-verify-a-license/' };
@@ -5,6 +8,8 @@ const ventilation = { title: 'ENERGY STAR: indoor air quality features', url: 'h
 const storm = { title: 'Florida Division of Emergency Management: planning for your home', url: 'https://www.floridadisaster.org/planprepare/home' };
 
 export const blogPosts = [
+  ...tampaConstructionPosts,
+  ...floridaConstructionPosts,
   {
     slug: 'kitchen-remodel-planning-tampa', category: 'Kitchens', service: 'kitchens-bathrooms', city: 'tampa-fl', image: 'interior',
     title: 'How to Plan a Kitchen Remodel in Tampa',
@@ -185,8 +190,12 @@ export const blogPosts = [
     ], checklist: ['Bring the scope and approved selections.', 'Demonstrate normal product operation.', 'Record specific remaining items.', 'Collect care, warranty and closeout information.'],
     faqs: [{ question: 'What belongs on a remodeling punch list?', answer: 'Record specific remaining or correction items against the agreed scope, with locations and next steps. New upgrades should be discussed separately from completion items.' }], sources: [],
   },
-].map(post => ({ ...post, date: '2026-10-15', author: 'Unique Building Contractors',
+].map(post => ({ date: '2026-10-15', ...post, author: 'Unique Building Contractors',
   readingMinutes: Math.max(1, Math.ceil([post.answer, ...post.sections.flatMap(section => section.paragraphs)].join(' ').split(/\s+/).length / 200)),
 }));
 
 export function getBlogPost(slug) { return blogPosts.find(post => post.slug === slug); }
+
+export function formatBlogDate(date) {
+  return new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T12:00:00Z`));
+}

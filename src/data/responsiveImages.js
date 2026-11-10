@@ -2,31 +2,33 @@ import image0 from "../assets/about.png";
 import image1 from "../assets/plan.jpg";
 import image2 from "../assets/after_kitchen.png";
 import image3 from "../assets/before_kitchen.png";
-import image4 from "../assets/team/chad.jpg";
-import image5 from "../assets/team/julio.jpg";
-import image6 from "../assets/team/rey.jpg";
-import image7 from "../assets/team/jim.jpg";
-import image8 from "../assets/redesign/interior.webp";
-import image9 from "../assets/redesign/bathroom.webp";
-import image10 from "../assets/redesign/flooring.webp";
-import image11 from "../assets/redesign/villa.webp";
-import image12 from "../assets/redesign/exterior.webp";
-import image13 from "../assets/redesign/materials.webp";
+import image4 from "../assets/redesign/villa.png";
+import image5 from "../assets/redesign/kitchen-cutout.png";
+import image6 from "../assets/redesign/bathroom-cutout.png";
+import image7 from "../assets/team/chad.jpg";
+import image8 from "../assets/team/julio.jpg";
+import image9 from "../assets/team/rey.jpg";
+import image10 from "../assets/team/jim.jpg";
+import image11 from "../assets/redesign/interior.webp";
+import image12 from "../assets/redesign/bathroom.webp";
+import image13 from "../assets/redesign/flooring.webp";
+import image14 from "../assets/redesign/materials.webp";
 export const responsiveImages = new Map([
 [image0, {"src":"/media/ce6388d2866e-1024.webp","srcSet":"/media/ce6388d2866e-480.webp 480w, /media/ce6388d2866e-960.webp 960w, /media/ce6388d2866e-1024.webp 1024w","width":1024,"height":1024}],
 [image1, {"src":"/media/366c1cec42e5-1280.webp","srcSet":"/media/366c1cec42e5-480.webp 480w, /media/366c1cec42e5-960.webp 960w, /media/366c1cec42e5-1280.webp 1280w","width":1280,"height":720}],
 [image2, {"src":"/media/32d65ef3fc13-1024.webp","srcSet":"/media/32d65ef3fc13-480.webp 480w, /media/32d65ef3fc13-960.webp 960w, /media/32d65ef3fc13-1024.webp 1024w","width":1024,"height":1024}],
 [image3, {"src":"/media/4b7338441519-1024.webp","srcSet":"/media/4b7338441519-480.webp 480w, /media/4b7338441519-960.webp 960w, /media/4b7338441519-1024.webp 1024w","width":1024,"height":1024}],
-[image4, {"src":"/media/7bdb82ecaf36-1280.webp","srcSet":"/media/7bdb82ecaf36-480.webp 480w, /media/7bdb82ecaf36-960.webp 960w, /media/7bdb82ecaf36-1280.webp 1280w","width":1280,"height":1427}],
-[image5, {"src":"/media/1a9459064a54-630.webp","srcSet":"/media/1a9459064a54-480.webp 480w, /media/1a9459064a54-630.webp 630w","width":630,"height":720}],
-[image6, {"src":"/media/b6d716861d3d-1280.webp","srcSet":"/media/b6d716861d3d-480.webp 480w, /media/b6d716861d3d-960.webp 960w, /media/b6d716861d3d-1280.webp 1280w","width":1280,"height":1504}],
-[image7, {"src":"/media/5ee91b658f73-1280.webp","srcSet":"/media/5ee91b658f73-480.webp 480w, /media/5ee91b658f73-960.webp 960w, /media/5ee91b658f73-1280.webp 1280w","width":1280,"height":1445}],
-[image8, {"src":"/media/1b0e2d212a7e-1280.webp","srcSet":"/media/1b0e2d212a7e-480.webp 480w, /media/1b0e2d212a7e-960.webp 960w, /media/1b0e2d212a7e-1280.webp 1280w","width":1280,"height":720}],
-[image9, {"src":"/media/efd5f1b2a858-1280.webp","srcSet":"/media/efd5f1b2a858-480.webp 480w, /media/efd5f1b2a858-960.webp 960w, /media/efd5f1b2a858-1280.webp 1280w","width":1280,"height":720}],
-[image10, {"src":"/media/6322f9123064-1280.webp","srcSet":"/media/6322f9123064-480.webp 480w, /media/6322f9123064-960.webp 960w, /media/6322f9123064-1280.webp 1280w","width":1280,"height":720}],
-[image11, {"src":"/media/cfe0e1f0882f-1280.webp","srcSet":"/media/cfe0e1f0882f-480.webp 480w, /media/cfe0e1f0882f-960.webp 960w, /media/cfe0e1f0882f-1280.webp 1280w","width":1280,"height":640}],
-[image12, {"src":"/media/b403330ec76b-1280.webp","srcSet":"/media/b403330ec76b-480.webp 480w, /media/b403330ec76b-960.webp 960w, /media/b403330ec76b-1280.webp 1280w","width":1280,"height":720}],
-[image13, {"src":"/media/fc78d74cdf41-1280.webp","srcSet":"/media/fc78d74cdf41-480.webp 480w, /media/fc78d74cdf41-960.webp 960w, /media/fc78d74cdf41-1280.webp 1280w","width":1280,"height":720}],
+[image4, {"src":"/media/e7e9841904ca-1280.webp","srcSet":"/media/e7e9841904ca-480.webp 480w, /media/e7e9841904ca-960.webp 960w, /media/e7e9841904ca-1280.webp 1280w","width":1280,"height":640}],
+[image5, {"src":"/media/df2334a143ef-1280.webp","srcSet":"/media/df2334a143ef-480.webp 480w, /media/df2334a143ef-960.webp 960w, /media/df2334a143ef-1280.webp 1280w","width":1280,"height":853}],
+[image6, {"src":"/media/dad16bc71164-1280.webp","srcSet":"/media/dad16bc71164-480.webp 480w, /media/dad16bc71164-960.webp 960w, /media/dad16bc71164-1280.webp 1280w","width":1280,"height":853}],
+[image7, {"src":"/media/7bdb82ecaf36-1280.webp","srcSet":"/media/7bdb82ecaf36-480.webp 480w, /media/7bdb82ecaf36-960.webp 960w, /media/7bdb82ecaf36-1280.webp 1280w","width":1280,"height":1427}],
+[image8, {"src":"/media/1a9459064a54-630.webp","srcSet":"/media/1a9459064a54-480.webp 480w, /media/1a9459064a54-630.webp 630w","width":630,"height":720}],
+[image9, {"src":"/media/b6d716861d3d-1280.webp","srcSet":"/media/b6d716861d3d-480.webp 480w, /media/b6d716861d3d-960.webp 960w, /media/b6d716861d3d-1280.webp 1280w","width":1280,"height":1504}],
+[image10, {"src":"/media/5ee91b658f73-1280.webp","srcSet":"/media/5ee91b658f73-480.webp 480w, /media/5ee91b658f73-960.webp 960w, /media/5ee91b658f73-1280.webp 1280w","width":1280,"height":1445}],
+[image11, {"src":"/media/1b0e2d212a7e-1280.webp","srcSet":"/media/1b0e2d212a7e-480.webp 480w, /media/1b0e2d212a7e-960.webp 960w, /media/1b0e2d212a7e-1280.webp 1280w","width":1280,"height":720}],
+[image12, {"src":"/media/efd5f1b2a858-1280.webp","srcSet":"/media/efd5f1b2a858-480.webp 480w, /media/efd5f1b2a858-960.webp 960w, /media/efd5f1b2a858-1280.webp 1280w","width":1280,"height":720}],
+[image13, {"src":"/media/6322f9123064-1280.webp","srcSet":"/media/6322f9123064-480.webp 480w, /media/6322f9123064-960.webp 960w, /media/6322f9123064-1280.webp 1280w","width":1280,"height":720}],
+[image14, {"src":"/media/fc78d74cdf41-1280.webp","srcSet":"/media/fc78d74cdf41-480.webp 480w, /media/fc78d74cdf41-960.webp 960w, /media/fc78d74cdf41-1280.webp 1280w","width":1280,"height":720}],
 ["/blog/images/bathroom.webp", {"src":"/media/c2548a05c58c-960.webp","srcSet":"/media/c2548a05c58c-480.webp 480w, /media/c2548a05c58c-960.webp 960w","width":960,"height":640}],
 ["/blog/images/exterior.webp", {"src":"/media/78efccc6d04a-960.webp","srcSet":"/media/78efccc6d04a-480.webp 480w, /media/78efccc6d04a-960.webp 960w","width":960,"height":640}],
 ["/blog/images/flooring.webp", {"src":"/media/4be27c1114a4-960.webp","srcSet":"/media/4be27c1114a4-480.webp 480w, /media/4be27c1114a4-960.webp 960w","width":960,"height":640}],

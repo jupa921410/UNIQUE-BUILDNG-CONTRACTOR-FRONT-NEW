@@ -21,6 +21,8 @@ const sources = new Map();
 async function walk(folder) {
   for (const item of await readdir(folder, { withFileTypes: true })) {
     const path = join(folder, item.name);
+    // Generated imports must not keep deleted source images in the next build.
+    if (path === join(root, 'src/data/responsiveImages.js')) continue;
     if (item.isDirectory()) await walk(path);
     else if (/\.(jsx|js)$/.test(path)) {
       const text = await readFile(path, 'utf8');

@@ -5,6 +5,7 @@ import { servicesData } from '../../data/servicesData';
 import Contact from '../../components/Contact/Contact';
 import ProcessSteps from '../../components/ProcessSteps/ProcessSteps';
 import ConceptHero from '../../components/ConceptHero/ConceptHero';
+import villa from '../../assets/redesign/villa.png';
 import './ServicePage.css';
 import SEO, { breadcrumbSchema, faqSchema, serviceSchema, SITE_URL } from '../../components/SEO/SEO';
 import { confirmedServiceAreas, serviceSeoData } from '../../data/serviceSeoData';
@@ -16,6 +17,7 @@ export default function ServicePage() {
   const { id } = useParams();
   const service = servicesData.find(s => s.id === id);
   const seo = serviceSeoData[id];
+  const floatingHero = id === 'new-construction' || id === 'additions';
 
   if (!service) {
     return (
@@ -39,7 +41,7 @@ export default function ServicePage() {
           faqSchema(seo.faqs),
         ]}
       />
-      <ConceptHero title={service.title} label={service.subtitle} description={service.desc} image={service.image} cutout={false} imageAlt={service.title + " project in Tampa Bay, FL"} />
+      <ConceptHero title={service.title} label={service.subtitle} description={service.desc} image={floatingHero ? villa : service.image} cutout={floatingHero} imageAlt={floatingHero ? 'Architectural inspiration for ' + service.title.toLowerCase() : service.title + " project in Tampa Bay, FL"} />
 
       <section className="service-details-section section">
         <div className="container">

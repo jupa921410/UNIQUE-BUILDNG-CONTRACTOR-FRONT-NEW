@@ -1,33 +1,52 @@
-import assert from 'node:assert/strict';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, access, stat } from 'node:fs/promises';
 import { join } from 'node:path';
-import { PHASE1_CITIES } from '../src/data/serviceAreasData.js';
 import { businessSchema, SITE_URL } from '../src/data/businessSchema.js';
+import { PHASE1_CITIES } from '../src/data/serviceAreasData.js';
 
-const xml = await readFile('dist/sitemap.xml', 'utf8');
-const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-const titles = new Set();
+const dist = 'dist';
+const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
+const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+const errors = [];
+const titles = new Map();
+const exists = async path => { try { await access(path); return true; } catch { return false; } };
+const fail = (url, message) => errors.push(`${url}: ${message}`);
 for (const url of urls) {
-  const path = new URL(url).pathname;
-  const html = await readFile(join('dist', path.slice(1), 'index.html'), 'utf8');
+  const { pathname } = new URL(url);
+  const file = join(dist, decodeURIComponent(pathname), 'index.html');
+  if (!await exists(file)) { fail(url, 'missing prerendered page'); continue; }
+  const html = await readFile(file, 'utf8');
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
-  assert.ok(title, `Missing title: ${path}`);
-  assert.ok(!titles.has(title), `Duplicate title: ${path}`);
-  titles.add(title);
-  assert.equal((html.match(/rel="canonical"/g) || []).length, 1, `Duplicate canonical: ${path}`);
-  assert.ok(html.includes(`rel="canonical" href="${url}"`), `Wrong canonical: ${path}`);
-  assert.equal((html.match(/<h1[\s>]/g) || []).length, 1, `Expected one H1: ${path}`);
-  const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1];
-  assert.ok(description && description.length <= 175, `Invalid description: ${path}`); // allows escaped ampersands
-  assert.ok(!/free consultation/i.test(description), `Forbidden description phrase: ${path}`);
-  assert.ok(!/name="keywords"/i.test(html), `Obsolete keywords: ${path}`);
-  assert.ok(!/fonts\.googleapis|unpkg\.com\/aos/.test(html), `External render-blocking assets: ${path}`);
+  if (!title) fail(url, 'missing title');
+  else if (titles.has(title)) fail(url, `duplicate title with ${titles.get(title)}`);
+  else titles.set(title, url);
+  if ((html.match(/<h1\b/g) || []).length !== 1) fail(url, 'expected one H1');
+  const canonicals = [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/g)];
+  if (canonicals.length !== 1 || canonicals[0][1] !== url) fail(url, 'incorrect canonical');
+  if (!/<meta\s+name="description"\s+content="[^"]+"/.test(html)) fail(url, 'missing description');
+  const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1] || '';
+  if (description.length > 175 || /free consultation/i.test(description)) fail(url, 'invalid description');
+  if (/name="keywords"/i.test(html)) fail(url, 'obsolete keywords');
+  if (/fonts\.googleapis|unpkg\.com\/aos/.test(html)) fail(url, 'external render-blocking assets');
   const preview = html.match(/property="og:image" content="([^"]*)"/)?.[1];
-  assert.ok(preview?.startsWith(SITE_URL + '/previews/'), `Missing own preview: ${path}`);
-  assert.ok((await stat(join('dist', new URL(preview).pathname.slice(1)))).size <= 150000, `Preview exceeds 150 KB: ${path}`);
-  for (const match of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) JSON.parse(match[1]);
+  if (!preview?.startsWith(SITE_URL + '/previews/')) fail(url, 'missing own preview');
+  else {
+    const image = join(dist, new URL(preview).pathname);
+    if (!await exists(image) || (await stat(image)).size > 150000) fail(url, 'missing preview or exceeds 150 KB');
+  }
+  if (/<meta\s+name="robots"[^>]*content="[^"]*noindex/.test(html)) fail(url, 'sitemap page is noindex');
+  const schemas = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
+  if (!schemas.length) fail(url, 'missing structured data');
+  for (const [, json] of schemas) { try { JSON.parse(json); } catch { fail(url, 'invalid JSON-LD'); } }
+  for (const [, href] of html.matchAll(/<(?:a|img|script|link)\b[^>]*\b(?:href|src)="([^"]+)"/g)) {
+    const target = new URL(href.replaceAll('&amp;', '&'), url);
+    if (target.origin !== SITE_URL || target.pathname === '/' || target.pathname.startsWith('/portal')) continue;
+    const path = join(dist, decodeURIComponent(target.pathname));
+    if (!await exists(path) && !await exists(join(path, 'index.html'))) fail(url, `missing internal target ${target.pathname}`);
+  }
 }
-assert.deepEqual(businessSchema.areaServed.map(item => item.url).sort(), PHASE1_CITIES.map(item => `${SITE_URL}/service-areas/${item.slug}`).sort());
-const error = await readFile('dist/404.html', 'utf8');
-assert.ok(error.includes('noindex, nofollow') && error.includes('<h1>Page Not Found</h1>'));
-console.log(`Passed SEO checks for ${urls.length} URLs and ${PHASE1_CITIES.length} matching service areas.`);
+if (new Set(urls).size !== urls.length) errors.push('Duplicate sitemap URLs');
+if (JSON.stringify(businessSchema.areaServed.map(item => item.url).sort()) !== JSON.stringify(PHASE1_CITIES.map(item => `${SITE_URL}/service-areas/${item.slug}`).sort())) errors.push('Business service areas do not match landing pages');
+const notFound = await readFile(join(dist, '404.html'), 'utf8');
+if (!/content="noindex, nofollow"/.test(notFound)) errors.push('404 must be noindex');
+if (errors.length) { console.error(errors.join('\n')); process.exitCode = 1; }
+else console.log(`SEO checks passed for ${urls.length} sitemap pages: HTML, titles, H1, canonicals, descriptions, JSON-LD and internal targets.`);

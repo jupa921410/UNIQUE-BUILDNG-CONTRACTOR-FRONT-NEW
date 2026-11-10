@@ -20,6 +20,7 @@ export default function Navbar() {
       <details className="studio-services"><summary data-active={servicesActive || undefined}>Services</summary><div className="studio-dropdown">{servicesData.map(service => <NavLink key={service.id} to={`/services/${service.id}`} onClick={event => { close(); event.currentTarget.closest('details').removeAttribute('open'); }}>{service.title}</NavLink>)}<NavLink to="/specialized" onClick={close}>Specialized services</NavLink></div></details>
       <NavLink to="/aboutus" onClick={close}>About us</NavLink>
       <NavLink to="/service-areas" onClick={close}>Service areas</NavLink>
+      <NavLink to="/financing" onClick={close}>Financing</NavLink>
       <NavLink to="/faq" onClick={close}>FAQ</NavLink>
       <NavLink to="/portal/login" onClick={close}>Client login</NavLink>
     </nav>

@@ -2,6 +2,7 @@ import { PHASE1_CITIES } from '../src/data/serviceAreasData.js';
 import { blogPosts } from '../src/data/blogPosts.js';
 
 export const staticUrls = [
+  { path: '/financing', changefreq: 'monthly', priority: '0.7' },
   { path: '/blog' },
   ...blogPosts.map(post => ({ path: `/blog/${post.slug}`, lastmod: post.date })),
   { path: '/',                                    changefreq: 'weekly',  priority: '1.0' },

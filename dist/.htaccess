@@ -37,7 +37,7 @@ DirectorySlash Off
   RewriteRule ^(.+?)/?$ /$1/index.html [L]
 
   # Only these private/transactional SPA routes may use the shell.
-  RewriteRule ^(?:portal(?:/(?:login|forgot-password|invoices|reset-password/[^/]+|projects/[^/]+))?|thank-you)/?$ /index.html [L]
+  RewriteRule ^(?:portal(?:/(?:login|forgot-password|invoices|reset-password/[^/]+|projects/[^/]+))?|thank-you|get-started)/?$ /index.html [L]
 
   # Preserve the legacy service URL as a permanent redirect.
   RewriteRule ^service/([a-z0-9-]+)/?$ /services/$1 [R=301,L]
@@ -54,6 +54,8 @@ DirectorySlash Off
 ErrorDocument 404 /404.html
 
 <IfModule mod_headers.c>
+  # Apply before JavaScript runs, including SPA shell responses.
+  Header always set X-Robots-Tag "noindex, nofollow" "expr=%{REQUEST_URI} =~ m#^/(?:portal(?:/|$)|thank-you(?:/|$))#"
   # Host-scoped: this rule cannot add noindex on www at production launch.
   Header always set X-Robots-Tag "noindex, nofollow" "expr=%{HTTP_HOST} =~ m#(?i)^test\.[^:]+(?::[0-9]+)?$#"
   <FilesMatch "\.(js|css|woff2?|ttf|otf|eot|png|jpe?g|gif|svg|webp|avif|ico|mp4|webm)$">

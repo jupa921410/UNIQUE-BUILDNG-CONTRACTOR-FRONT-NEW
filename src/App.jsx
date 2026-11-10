@@ -49,8 +49,11 @@ const BlogPostPage = lazy(() => import('./pages/BlogPage/BlogPostPage'))
 const ServiceAreasPage = lazy(() => import('./pages/ServiceAreasPage/ServiceAreasPage'))
 const CityPage = lazy(() => import('./pages/CityPage/CityPage'))
 const ThankYouPage = lazy(() => import('./pages/ThankYouPage/ThankYouPage'))
+const QualifyPage = lazy(() => import('./pages/QualifyPage/QualifyPage'))
 
-// Client Portal — login-gated section, own chrome (no marketing Navbar/Footer)
+const FinancingPage = lazy(() => import('./pages/FinancingPage/FinancingPage'))
+
+// Client Portal â€” login-gated section, own chrome (no marketing Navbar/Footer)
 const PortalLogin = lazy(() => import('./pages/ClientPortal/PortalLogin/PortalLogin'))
 const PortalForgotPassword = lazy(() => import('./pages/ClientPortal/PortalForgotPassword/PortalForgotPassword'))
 const PortalResetPassword = lazy(() => import('./pages/ClientPortal/PortalResetPassword/PortalResetPassword'))
@@ -100,12 +103,14 @@ function App() {
           <Route path="/terms" element={<LegalPage type="terms" />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/financing" element={<FinancingPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/service-areas" element={<ServiceAreasPage />} />
           <Route path="/service-areas/:citySlug" element={<CityPage />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
+          <Route path="/get-started" element={<QualifyPage />} />
           <Route path="/service/:id" element={<LegacyServiceRedirect />} />
           <Route path="/services/kitchensabdathrooms" element={<Navigate to="/services/kitchens-bathrooms" replace />} />
           <Route path="*" element={<NotFoundPage />} />

@@ -16,6 +16,14 @@ export const API_ENDPOINTS = {
   CONTACT_FORM: `${API_BASE_URL}/api/contact`,
 
   /**
+   * Formulario de calificación de clientes (página /get-started).
+   * POST /api/qualify                 → guarda respuestas en "Leads Filtrados"
+   * GET  /api/qualify/prefill/{token} → datos de contacto para links personalizados (?ref=TOKEN)
+   */
+  QUALIFY_FORM: `${API_BASE_URL}/api/qualify`,
+  QUALIFY_PREFILL: (token) => `${API_BASE_URL}/api/qualify/prefill/${encodeURIComponent(token)}`,
+
+  /**
    * Portfolio / Showcase projects.
    * GET /api/showcase         → lista de proyectos publicados
    * GET /api/showcase/slug/{slug}   → detalle completo de un proyecto

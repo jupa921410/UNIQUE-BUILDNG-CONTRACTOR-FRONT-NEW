@@ -22,8 +22,18 @@ import {
 } from 'lucide-react';
 import {
   fetchShowcaseProject,
+  fetchShowcaseProjects,
   formatCompletionDate,
 } from '../../services/showcaseService';
+import {
+  projectArea,
+  projectBlocks,
+  projectCity,
+  projectImageAlt,
+  projectMetaDescription,
+  projectService,
+  relatedProjects,
+} from '../../data/projectContent';
 import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer';
 import './ProjectDetailPage.css';
 import SEO, { breadcrumbSchema, SITE_URL } from '../../components/SEO/SEO';
@@ -47,7 +57,7 @@ function StatusBadge({ status }) {
 }
 
 // ── Image lightbox / gallery ───────────────────────────────────────────────
-function MediaViewer({ item, location, projectTitle }) {
+function MediaViewer({ item, location, projectTitle, alt }) {
   if (!item) return null;
   const caption = `${item.caption || projectTitle || 'Construction project'}, ${location || 'Tampa Bay FL'}`;
 
@@ -102,7 +112,7 @@ function MediaViewer({ item, location, projectTitle }) {
           {item.url ? (
             <ResponsiveImage
               src={item.url}
-              alt={caption}
+              alt={alt || caption}
               className="pdp-gallery-media"
             />
           ) : (
@@ -113,7 +123,7 @@ function MediaViewer({ item, location, projectTitle }) {
   }
 }
 
-function Gallery({ images, location, projectTitle }) {
+function Gallery({ images, location, projectTitle, project }) {
   const [current, setCurrent] = useState(0);
 
   if (!images?.length) return null;
@@ -139,7 +149,7 @@ function Gallery({ images, location, projectTitle }) {
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
-            <MediaViewer item={ordered[current]} location={location} projectTitle={projectTitle} />
+            <MediaViewer item={ordered[current]} location={location} projectTitle={projectTitle} alt={project ? projectImageAlt(project, current, ordered[current]) : undefined} />
           </motion.div>
         </AnimatePresence>
 
@@ -173,7 +183,7 @@ function Gallery({ images, location, projectTitle }) {
               aria-label={`Go to media ${i + 1}`}
             >
               {item.url ? (
-                <ResponsiveImage src={item.url} alt={`${item.caption || `Project photo ${i + 1}`}, ${location || "Tampa Bay FL"}`} />
+                <ResponsiveImage src={item.url} alt={project ? projectImageAlt(project, i, item) : `Project photo ${i + 1}, ${location || 'Tampa Bay FL'}`} />
               ) : (
                 <div className="pdp-thumb-placeholder">
                   {item.media_type === 'iframe'
@@ -214,6 +224,15 @@ export default function ProjectDetailPage() {
   const [project, setProject] = useState(initialProject);
   const [loading, setLoading] = useState(!initialProject);
   const [error, setError] = useState(null);
+  const [allProjects, setAllProjects] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchShowcaseProjects()
+      .then((list) => { if (!cancelled) setAllProjects(list); })
+      .catch(() => { /* Related links are optional. */ });
+    return () => { cancelled = true; };
+  }, []);
 
   useEffect(() => {
     if (project?.slug === slug) {
@@ -279,7 +298,13 @@ export default function ProjectDetailPage() {
   const featured = project.featured;
   const completionDate = formatCompletionDate(project.completion_date);
   const projectImage = project.images?.find((image) => image.is_primary)?.url || project.images?.[0]?.url;
-  const projectDescription = project.description || `${project.title}, a Unique Building Contractors project in ${project.location || 'Tampa Bay'}.`;
+  const city = projectCity(project);
+  const heading = `${project.title}${city ? ` in ${city}, FL` : ''}`;
+  const overview = projectBlocks(project.description);
+  const projectDescription = projectMetaDescription(project);
+  const service = projectService(project);
+  const area = projectArea(project);
+  const related = relatedProjects(project, allProjects);
   const imageSchemas = (project.images || []).filter(image => image.url && ['image', 'image_360'].includes(image.media_type)).map(image => ({
     '@context': 'https://schema.org', '@type': 'ImageObject', contentUrl: image.url,
     caption: image.caption || project.title, representativeOfPage: Boolean(image.is_primary),
@@ -300,7 +325,7 @@ export default function ProjectDetailPage() {
     <main className="pdp-page">
       <SEO
         title={`${project.title}${project.location ? ` — ${project.location}` : ''}`}
-        description={projectDescription.slice(0, 160)}
+        description={projectDescription}
         image={projectImage}
         type="article"
         schema={[
@@ -338,7 +363,7 @@ export default function ProjectDetailPage() {
               {featured && <span className="pdp-featured-badge"><Star size={13} /> Featured</span>}
               {project.project_status && <StatusBadge status={project.project_status} />}
             </div>
-            <h1 className="section-title">{project.title}</h1>
+            <h1 className="section-title">{heading}</h1>
           </motion.div>
         </div>
       </section>
@@ -354,14 +379,40 @@ export default function ProjectDetailPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.1 }}
           >
-            <Gallery images={project.images} location={project.location} projectTitle={project.title} />
+            <Gallery images={project.images} location={project.location} projectTitle={project.title} project={project} />
 
-            {project.description && (
+            {overview.length > 0 && (
               <div className="pdp-description glass-card">
                 <h2 className="pdp-section-heading">Project Overview</h2>
-                <p>{project.description}</p>
+                {overview.map((block, index) => (block.type === 'ul'
+                  ? <ul key={index} className="pdp-scope-list">{block.items.map(item => <li key={item}>{item}</li>)}</ul>
+                  : <p key={index}>{block.text}</p>))}
               </div>
             )}
+
+            <div className="pdp-description glass-card pdp-related">
+              <h2 className="pdp-section-heading">Related Services</h2>
+              <ul className="pdp-related-list">
+                <li><Link to={service.path}>{service.name}</Link></li>
+                {area
+                  ? <li><Link to={`/service-areas/${area.slug}`}>Remodeling contractor in {area.city}, FL</Link></li>
+                  : <li><Link to="/service-areas">Tampa Bay service areas</Link></li>}
+              </ul>
+              {related.length > 0 && (
+                <>
+                  <h2 className="pdp-section-heading">More Projects</h2>
+                  <ul className="pdp-related-list">
+                    {related.map(item => (
+                      <li key={item.slug}>
+                        <Link to={`/portfolio/${item.slug}`}>
+                          {item.title}{projectCity(item) ? ` — ${projectCity(item)}, FL` : ''}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
           </motion.div>
 
           {/* ── RIGHT: Sidebar ── */}

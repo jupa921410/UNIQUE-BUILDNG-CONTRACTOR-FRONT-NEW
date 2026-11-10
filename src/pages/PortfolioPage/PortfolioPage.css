@@ -566,3 +566,28 @@
     height: 230px;
   }
 }
+.pp-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.pp-pagination-item { display: inline-flex; align-items: center; gap: 8px; }
+.pp-pagination button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--text-muted);
+  color: var(--text-dark);
+  background: var(--bg-soft);
+  font: inherit;
+  cursor: pointer;
+}
+.pp-pagination button[aria-current="page"],
+.pp-pagination button:hover:not(:disabled) { background: var(--text-dark); color: var(--bg-soft); }
+.pp-pagination button:disabled { opacity: .4; cursor: default; }
+.pp-pagination button:focus-visible { outline: 2px solid var(--text-dark); outline-offset: 3px; }
+#project-collection { scroll-margin-top: 110px; }

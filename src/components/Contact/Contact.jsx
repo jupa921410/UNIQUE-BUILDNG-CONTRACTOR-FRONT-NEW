@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Phone, Mail, Clock, ArrowRight, Lock, CheckCircle2, AlertCircle } from 'lucide-react';
 const ServiceMap = lazy(() => import('./ServiceMap'));
 import { API_ENDPOINTS } from '../../config/api';
+import { trackFormConversion } from '../../config/conversions';
 import './Contact.css';
 
 const services = [
@@ -55,6 +56,7 @@ export default function Contact({ showSmsConsent = false }) {
       }
 
       setStatus('sent');
+      trackFormConversion();
       setForm({ name: '', email: '', phone: '', service: '', message: '' });
       setSmsConsent('');
     } catch (error) {
