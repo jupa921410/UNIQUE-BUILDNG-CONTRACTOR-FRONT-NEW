@@ -1,10 +1,11 @@
-import { Suspense, lazy, useEffect } from 'react'
+import { Suspense, lazy, useEffect, useRef } from 'react'
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import './index.css'
 import './marketing.css'
 import './portal-theme.css'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
+import { trackContentView } from './config/conversions'
 import { PortalAuthProvider } from './context/PortalAuthContext'
 import PortalRoute from './components/PortalLayout/PortalRoute'
 // Note: the LocalBusiness/WebSite JSON-LD (formerly rendered here via
@@ -63,7 +64,19 @@ const PortalProjectDetail = lazy(() => import('./pages/ClientPortal/PortalProjec
 
 function App() {
   const { pathname } = useLocation();
-  const isPortal = pathname.startsWith('/portal');
+  const isPortal = pathname === '/portal' || pathname.startsWith('/portal/');
+  const lastTrackedPath = useRef(null);
+
+  useEffect(() => {
+    // Do not count portal visits or re-renders/query/hash changes as content views.
+    if (isPortal) {
+      lastTrackedPath.current = null;
+      return;
+    }
+    // React StrictMode runs effects twice in development.
+    if (lastTrackedPath.current === pathname) return;
+    if (trackContentView()) lastTrackedPath.current = pathname;
+  }, [pathname, isPortal]);
 
   if (isPortal) {
     return (
