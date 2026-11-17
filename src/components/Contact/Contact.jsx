@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, Clock, ArrowRight, Lock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Phone, Mail, Clock, ArrowRight, Lock, CheckCircle2, AlertCircle, MapPin } from 'lucide-react';
 const ServiceMap = lazy(() => import('./ServiceMap'));
 import { API_ENDPOINTS } from '../../config/api';
 import { getConversionContext, readFormConversion, trackFormConversion } from '../../config/conversions';
@@ -110,6 +110,20 @@ export default function Contact({ showSmsConsent = false }) {
                 <div className="contact-card-content">
                   <div className="contact-card-label">Email Us</div>
                   <div className="contact-card-value">sales@uniquebuildingcontractors.com</div>
+                </div>
+                <div className="contact-card-arrow"><ArrowRight size={20} /></div>
+              </a>
+
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=4500+140th+Ave+N%2C+%23214%2C+Clearwater%2C+FL+33762"
+                target="_blank"
+                rel="noreferrer"
+                className="contact-card group"
+              >
+                <div className="contact-card-icon"><MapPin size={24} /></div>
+                <div className="contact-card-content">
+                  <div className="contact-card-label">Address</div>
+                  <div className="contact-card-value">4500 140th Ave N #214<br />Clearwater, FL 33762</div>
                 </div>
                 <div className="contact-card-arrow"><ArrowRight size={20} /></div>
               </a>
