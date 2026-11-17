@@ -7,7 +7,8 @@ import {
 } from 'lucide-react';
 import SEO from '../../components/SEO/SEO';
 import { API_ENDPOINTS } from '../../config/api';
-import { trackFormConversion } from '../../config/conversions';
+import { getConversionContext, readFormConversion, trackFormConversion } from '../../config/conversions';
+import ConversionConsent from '../../components/ConversionConsent/ConversionConsent';
 import {
   BEST_TIMES, BUDGETS, CONTACT_METHODS, DECISION, OWNERSHIP, PROJECT_TYPES,
   PROPERTY_TYPES, REFERRAL_SOURCES, TIMELINES,
@@ -90,6 +91,7 @@ export default function QualifyPage() {
   const ref = params.get('ref') || '';
   const [form, setForm] = useState(EMPTY);
   const [smsConsent, setSmsConsent] = useState('');
+  const [measurementConsent, setMeasurementConsent] = useState(false);
   const [website, setWebsite] = useState(''); // honeypot
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -180,6 +182,7 @@ export default function QualifyPage() {
           ref: ref || undefined,
           website,
           ...utm,
+          conversion: getConversionContext(measurementConsent),
         }),
       });
 
@@ -195,7 +198,7 @@ export default function QualifyPage() {
       if (!response.ok) throw new Error(`Server error: ${response.status}`);
 
       setStatus('sent');
-      trackFormConversion();
+      trackFormConversion(await readFormConversion(response));
       scrollToCard();
     } catch (error) {
       console.error('Qualification form submission failed:', error);
@@ -361,6 +364,7 @@ export default function QualifyPage() {
                             are available at <Link to="/privacy">uniquebuildingcontractors.com/privacy</Link>.
                           </p>
                         </fieldset>
+                        <ConversionConsent checked={measurementConsent} onChange={setMeasurementConsent} />
                       </>
                     )}
                   </motion.div>
@@ -378,7 +382,7 @@ export default function QualifyPage() {
                     </button>
                   )}
                 </div>
-                <p className="qf-privacy"><Lock size={14} /> No commitment. Your information is never shared.</p>
+                <p className="qf-privacy"><Lock size={14} /> No commitment. Your contact details help us respond to your request.</p>
               </form>
             )}
           </div>

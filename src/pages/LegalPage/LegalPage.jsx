@@ -22,6 +22,11 @@ export default function LegalPage({ type }) {
           <>
             <p>Unique Building Contractors collects the information you voluntarily submit through our contact form, including your name, phone number, email address, requested service and project details.</p>
             <p>We use this information to respond to inquiries, prepare consultations and communicate about requested construction services. We do not sell personal information.</p>
+            <section id="advertising-measurement" style={{ marginTop: '28px' }}>
+              <h2>Optional advertising measurement</h2>
+              <p>If you opt in on a request form, we send OpenAI a SHA-256 hash of your email address, when provided, and a hashed customer reference to measure advertising results. We also send the event time, page address without query parameters, available advertising click and browser references, and your IP address and browser user agent. The same event reference prevents duplicate counting between browser and server measurements.</p>
+              <p>This request measurement is optional and separate from SMS consent. We do not send your phone number, SMS consent, name or project message through this integration. You can leave the measurement checkbox unchecked and still submit your request.</p>
+            </section>
             <p>To request access, correction or deletion of your information, email <a href="mailto:sales@uniquebuildingcontractors.com">sales@uniquebuildingcontractors.com</a>.</p>
 
             <section id="messaging-privacy-policy" style={{ marginTop: '48px' }}>
@@ -45,7 +50,7 @@ export default function LegalPage({ type }) {
 
               <h3 style={{ marginTop: '28px', marginBottom: '10px' }}>Data Sharing</h3>
               <ul style={{ paddingLeft: '24px', listStyle: 'disc' }}>
-                <li>Customer data is not shared with 3rd parties for promotional or marketing purposes.</li>
+                <li>Except for optional advertising measurement described above, customer data is not shared with 3rd parties for promotional or marketing purposes.</li>
                 <li>Mobile opt-in and consent are never shared with anyone for any purpose. Any information sharing that may be mentioned elsewhere in this policy excludes mobile opt-in data.</li>
               </ul>
 
@@ -67,7 +72,7 @@ export default function LegalPage({ type }) {
             <p>For questions, contact <a href="mailto:sales@uniquebuildingcontractors.com">sales@uniquebuildingcontractors.com</a>.</p>
           </>
         )}
-        <p><small>Last updated: {type === 'privacy' ? 'October 4, 2026' : 'July 13, 2026'}.</small></p>
+        <p><small>Last updated: {type === 'privacy' ? 'November 13, 2026' : 'July 13, 2026'}.</small></p>
       </div>
     </main>
   );

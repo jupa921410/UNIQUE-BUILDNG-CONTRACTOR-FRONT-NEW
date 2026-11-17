@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { Phone, Mail, Clock, ArrowRight, Lock, CheckCircle2, AlertCircle } from 'lucide-react';
 const ServiceMap = lazy(() => import('./ServiceMap'));
 import { API_ENDPOINTS } from '../../config/api';
-import { trackFormConversion } from '../../config/conversions';
+import { getConversionContext, readFormConversion, trackFormConversion } from '../../config/conversions';
+import ConversionConsent from '../ConversionConsent/ConversionConsent';
 import './Contact.css';
 
 const services = [
@@ -25,6 +26,7 @@ export default function Contact({ showSmsConsent = false }) {
     message: '',
   });
   const [smsConsent, setSmsConsent] = useState('');
+  const [measurementConsent, setMeasurementConsent] = useState(false);
   const [status, setStatus] = useState(null); // null | 'sending' | 'sent' | 'error'
 
   const handleChange = (e) => {
@@ -46,9 +48,11 @@ export default function Contact({ showSmsConsent = false }) {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(showSmsConsent
-          ? { ...form, smsConsent: smsConsent === 'yes', smsConsentChoice: smsConsent || 'none' }
-          : form),
+        body: JSON.stringify({
+          ...form,
+          ...(showSmsConsent ? { smsConsent: smsConsent === 'yes', smsConsentChoice: smsConsent || 'none' } : {}),
+          conversion: getConversionContext(measurementConsent),
+        }),
       });
 
       if (!response.ok) {
@@ -56,9 +60,10 @@ export default function Contact({ showSmsConsent = false }) {
       }
 
       setStatus('sent');
-      trackFormConversion();
+      trackFormConversion(await readFormConversion(response));
       setForm({ name: '', email: '', phone: '', service: '', message: '' });
       setSmsConsent('');
+      setMeasurementConsent(false);
     } catch (error) {
       console.error('Contact form submission failed:', error);
       setStatus('error');
@@ -295,6 +300,8 @@ export default function Contact({ showSmsConsent = false }) {
                     </fieldset>
                   )}
 
+                  <ConversionConsent checked={measurementConsent} onChange={setMeasurementConsent} />
+
                   <button
                     type="submit"
                     className="btn btn-primary form-submit"
@@ -314,7 +321,7 @@ export default function Contact({ showSmsConsent = false }) {
                   </button>
 
                   <p className="form-privacy">
-                    <Lock size={14} className="inline-icon" /> Your information is 100% private and never shared.
+                    <Lock size={14} className="inline-icon" /> Your contact details are used to respond to your request.
                   </p>
                 </form>
                 </>

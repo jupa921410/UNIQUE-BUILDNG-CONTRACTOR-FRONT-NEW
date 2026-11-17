@@ -1,0 +1,21 @@
+.conversion-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.conversion-consent input[type="checkbox"] {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin: 4px 0 0;
+  padding: 0;
+  accent-color: #112033;
+}
+
+.conversion-consent a { text-decoration: underline; }
