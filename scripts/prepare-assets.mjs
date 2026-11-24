@@ -61,27 +61,35 @@ for (const [key, source] of sources) {
     try {
       const existing = await stat(join(output, name));
       if (existing.size <= 150000) {
-        variants.push({ src: `/media/${name}`, width, bytes: existing.size });
+        const existingMeta = await sharp(join(output, name)).metadata();
+        variants.push({ src: `/media/${name}`, width: existingMeta.width, bytes: existing.size });
         continue;
       }
     } catch { /* Encode a new source or width. */ }
-    let encoded;
-    for (let quality = 82; quality >= 22; quality -= 10) {
-      encoded = await sharp(buffer).rotate().resize({ width, withoutEnlargement: true }).webp({ quality, alphaQuality: 55, effort: 5 }).toBuffer();
+    let encoded, encodedWidth = width;
+    while (true) {
+      for (let quality = 82; quality >= 22; quality -= 10) {
+        const result = await sharp(buffer).rotate().resize({ width: encodedWidth, withoutEnlargement: true }).webp({ quality, alphaQuality: 55, effort: 5 }).toBuffer({ resolveWithObject: true });
+        encoded = result.data;
+        if (encoded.length <= 150000) break;
+      }
       if (encoded.length <= 150000) break;
+      if (encodedWidth <= 64) throw new Error(`Image cannot be reduced below 150 KB: ${key}, ${width}`);
+      encodedWidth = Math.max(64, Math.floor(encodedWidth * 0.8));
     }
-    if (encoded.length > 150000) throw new Error(`Image exceeds 150 KB: ${key}, ${width}`);
     await writeFile(join(output, name), encoded);
-    variants.push({ src: `/media/${name}`, width, bytes: encoded.length });
+    const encodedMeta = await sharp(encoded).metadata();
+    variants.push({ src: `/media/${name}`, width: encodedMeta.width, bytes: encoded.length });
   }
+  const responsiveVariants = [...new Map(variants.map(variant => [variant.width, variant])).values()].sort((a, b) => a.width - b.width);
   let expression = JSON.stringify(key);
   if (!key.startsWith('/') && !source.remote || key.startsWith(root)) {
     const identifier = `image${index++}`;
     imports.push(`import ${identifier} from ${JSON.stringify('../' + relative(join(root, 'src'), source.path).replaceAll('\\', '/'))};`);
     expression = identifier;
   }
-  const largest = variants.at(-1);
-  const image = { src: largest.src, srcSet: variants.map(v => `${v.src} ${v.width}w`).join(', '), width: largest.width, height: Math.round(largest.width * meta.height / meta.width) };
+  const largest = responsiveVariants.at(-1);
+  const image = { src: largest.src, srcSet: responsiveVariants.map(v => `${v.src} ${v.width}w`).join(', '), width: largest.width, height: Math.round(largest.width * meta.height / meta.width) };
   if (source.path && key.startsWith(root)) localImages[source.path] = image;
   else publicImages[key] = image;
   entries.push(`[${expression}, ${JSON.stringify(image)}]`);
