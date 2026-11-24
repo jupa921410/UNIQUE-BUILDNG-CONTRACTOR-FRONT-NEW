@@ -134,6 +134,16 @@ export default function Contact({ showSmsConsent = false }) {
                   <Clock size={24} />
                 </div>
                 <div className="contact-card-content">
+                  <div className="contact-card-label">Office Hours</div>
+                  <div className="contact-card-value">Mon–Fri 8:00 AM–4:00 PM<br />Sat–Sun Closed</div>
+                </div>
+              </div>
+
+              <div className="contact-card">
+                <div className="contact-card-icon">
+                  <Clock size={24} />
+                </div>
+                <div className="contact-card-content">
                   <div className="contact-card-label">Response Time</div>
                   <div className="contact-card-value">Within 24 Hours</div>
                 </div>

@@ -19,6 +19,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import ConceptHero from '../../components/ConceptHero/ConceptHero';
+import livingRoom from '../../assets/redesign/flooring.webp';
 import {
   fetchShowcaseProjects,
   getPrimaryImage,
@@ -226,7 +227,7 @@ export default function PortfolioPage() {
         description="Explore completed home construction, remodeling, kitchen, bathroom and flooring projects by Unique Building Contractors across Tampa Bay."
       />
       {/* â”€â”€ Hero banner â”€â”€ */}
-      <ConceptHero title="Crafted spaces. Real stories." label="Our portfolio" description="Explore our completed construction and renovation projects across Tampa Bay. See the spaces, details and craftsmanship behind each project." cta="Explore the projects" to="/portfolio#project-collection" />
+      <ConceptHero title="Crafted spaces. Real stories." label="Our portfolio" description="Explore our completed construction and renovation projects across Tampa Bay. See the spaces, details and craftsmanship behind each project." image={livingRoom} imageAlt="Living room concept with walnut flooring opening onto a pool terrace" cutout={false} cta="Explore the projects" to="/portfolio#project-collection" />
 
       {/* â”€â”€ Filters â”€â”€ */}
       <section className="pp-filters-bar" id="project-collection">

@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
 import SEO, { breadcrumbSchema, SITE_URL } from '../../components/SEO/SEO';
-import ConceptHero from '../../components/ConceptHero/ConceptHero';
 import Contact from '../../components/Contact/Contact';
-import { projectPhotos } from '../../data/projectPresentation';
-const interior = projectPhotos.living;
 
 export default function ContactPage() {
   return <main>
-    <SEO title="Contact Us | Tampa Bay Construction & Remodeling" description="Contact Unique Building Contractors to discuss your Tampa Bay construction or remodeling project. Call (813) 523-7828 or request a free consultation." path="/contact" schema={[
+    <SEO title="Contact Unique Building Contractors | Clearwater, FL" description="Contact Unique Building Contractors: 4500 140th Ave N #214, Clearwater, FL 33762. Call (813) 523-7828, Mon–Fri 8 AM–4 PM, for a free estimate." path="/contact" schema={[
       { '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Contact Unique Building Contractors', url: `${SITE_URL}/contact`, about: { '@id': `${SITE_URL}/#business` } },
       breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]),
     ]} />

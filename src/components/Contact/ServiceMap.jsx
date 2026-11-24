@@ -16,7 +16,8 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const center = [27.9506, -82.4572]; // Tampa center
+const center = [27.9506, -82.4572]; // Tampa Bay service-radius center
+const office = [27.8983, -82.695]; // 4500 140th Ave N #214, Clearwater, FL 33762
 const radiusInMeters = 50 * 1609.34; // 75 miles to meters
 
 export default function ServiceMap() {
@@ -42,10 +43,11 @@ export default function ServiceMap() {
           }}
           radius={radiusInMeters}
         />
-        <Marker position={center}>
+        <Marker position={office}>
           <Popup>
             <strong>Unique Building Contractors</strong><br />
-            Serving Tampa Bay and 75 miles around.
+            4500 140th Ave N #214, Clearwater, FL 33762<br />
+            Mon–Fri 8:00 AM–4:00 PM
           </Popup>
         </Marker>
       </MapContainer>

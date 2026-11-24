@@ -2,10 +2,10 @@ import { faqs } from '../src/data/faqs.js';
 
 export function contactFaqHtml(template, path, siteUrl) {
   const isFaq = path === '/faq';
-  const title = isFaq ? 'Frequently Asked Questions' : 'Contact Unique Building Contractors';
+  const title = isFaq ? 'Frequently Asked Questions' : 'Contact Unique Building Contractors | Clearwater, FL';
   const description = isFaq
     ? 'Answers to common questions about our Tampa Bay construction and remodeling services, consultations, estimates, project timelines, and client portal.'
-    : 'Contact Unique Building Contractors to discuss your Tampa Bay construction or remodeling project. Call (813) 523-7828 or request a free consultation.';
+    : 'Contact Unique Building Contractors: 4500 140th Ave N #214, Clearwater, FL 33762. Call (813) 523-7828, Mon–Fri 8 AM–4 PM, for a free estimate.';
   const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
   const url = `${siteUrl}${path}`;
   const fullTitle = `${title}${isFaq ? ' | Unique Building Contractors' : ''}`;
@@ -20,7 +20,7 @@ export function contactFaqHtml(template, path, siteUrl) {
     : { '@context': 'https://schema.org', '@type': 'ContactPage', name: title, url, about: { '@id': `${siteUrl}/#business` } };
   const content = isFaq
     ? faqs.map(({ question, answer }) => `<details><summary>${escape(question)}</summary><p>${escape(answer)}</p></details>`).join('') + '<a href="/contact">Contact us</a>'
-    : '<p>Discuss your Tampa Bay construction or remodeling project with our team.</p><a href="tel:+18135237828">(813) 523-7828</a><a href="mailto:sales@uniquebuildingcontractors.com">sales@uniquebuildingcontractors.com</a><p>Request a free consultation using our contact form.</p><a href="/faq">Frequently Asked Questions</a>';
+    : '<p>Discuss your Tampa Bay construction or remodeling project with our team.</p><h2>Office</h2><address>Unique Building Contractors LLC<br />4500 140th Ave N #214<br />Clearwater, FL 33762</address><h2>Office Hours</h2><p>Monday–Friday: 8:00 AM–4:00 PM<br />Saturday–Sunday: Closed</p><a href="tel:+18135237828">(813) 523-7828</a><a href="mailto:sales@uniquebuildingcontractors.com">sales@uniquebuildingcontractors.com</a><p>Request a free consultation using our contact form.</p><a href="/faq">Frequently Asked Questions</a>';
   return html.replace('</head>', `<script id="ubc-page-schema" type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script></head>`)
-    .replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root"><article><h1>${escape(title)}</h1><p>${escape(description)}</p>${content}</article></div>`);
+    .replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root"><article><h1>${escape(isFaq ? title : 'Contact Unique Building Contractors in Clearwater, FL')}</h1><p>${escape(description)}</p>${content}</article></div>`);
 }

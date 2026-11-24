@@ -454,7 +454,8 @@ const processContent = {
 };
 
 const ProcessSteps = ({ serviceId }) => {
-  const phases = processContent[serviceId] || processContent.default;
+  // ADU / in-law suite projects follow the same phases as home additions.
+  const phases = processContent[serviceId === 'adu-in-law-suites' ? 'additions' : serviceId] || processContent.default;
 
   return (
     <section className="process-steps-section">

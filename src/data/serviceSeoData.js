@@ -29,12 +29,35 @@ export const serviceSeoData = {
     ],
   },
   additions: {
-    intro: 'Home additions are planned to connect new living space with the home\'s existing structure, systems, roofline, and architectural character.',
+    intro: 'Home additions in Tampa, Clearwater and across Tampa Bay are planned to connect new living space with the home\'s existing structure, systems, roofline, and architectural character — with zoning, flood-zone and permit requirements reviewed before design is final.',
+    related: [
+      { to: '/services/adu-in-law-suites', label: 'ADUs, in-law suites & extended family residences' },
+      { to: '/service-areas/tampa-fl', label: 'Home additions in Tampa' },
+      { to: '/service-areas/clearwater-fl', label: 'Home additions in Clearwater' },
+    ],
     faqs: [
+      { question: 'Do you build home additions in Tampa and Clearwater?', answer: 'Yes. Unique Building Contractors builds room additions, primary-suite additions, in-law suites and garage conversions in Tampa, Clearwater and surrounding Tampa Bay communities in Hillsborough, Pinellas and Pasco counties. Our office is located at 4500 140th Ave N #214, Clearwater, FL 33762.' },
+      { question: 'Can a home addition include an in-law suite?', answer: 'Yes. An attached addition can be designed as a private suite with a bedroom, bathroom and living area, and in some cases a separate entrance or kitchenette, subject to local zoning rules. See our ADU and in-law suite page for detached units and extended family residences.' },
       { question: 'What types of home additions do you build?', answer: 'Projects may include bedroom or primary-suite additions, expanded living areas, enclosed patios or sunrooms, garage conversions, and in-law or guest suites, subject to the property layout and approved scope.' },
       { question: 'Will an addition match the existing home?', answer: 'Matching the existing roofline, exterior materials, interior transitions, and architectural details is a core part of our planning and construction process. We evaluate compatibility before finalizing the design.' },
       { question: 'Do home additions in Florida require permits?', answer: 'Home additions require building permits through the local authority having jurisdiction, covering structural, electrical, plumbing, and HVAC work. Unique Building Contractors prepares and submits all permit applications, coordinates with the applicable county or city building department, and manages every milestone inspection through project closeout as the contractor of record.' },
       { question: 'How do you handle the structural tie-in between new and existing space?', answer: 'Structural integration — including roofline tie-ins, foundation connections, and load calculations — is evaluated before construction begins. We coordinate with licensed structural engineers when required and manage all related permit documentation.' },
+    ],
+  },
+  'adu-in-law-suites': {
+    intro: 'ADUs, in-law suites and extended family residences give Tampa Bay families private living space on the same property. Each project starts with a property-specific review of zoning, setbacks, utilities and permits.',
+    related: [
+      { to: '/services/additions', label: 'Home additions in Tampa & Clearwater' },
+      { to: '/service-areas/tampa-fl', label: 'Contractor in Tampa' },
+      { to: '/service-areas/clearwater-fl', label: 'Contractor in Clearwater' },
+    ],
+    faqs: [
+      { question: 'What is the difference between an ADU, an in-law suite and an extended family residence?', answer: 'An in-law suite is usually an attached part of the main home with its own bedroom, bathroom and living area. An accessory dwelling unit (ADU) is a separate, self-contained living unit — attached or detached — on the same lot. "Extended family residence" is a term some local land development codes use for living space intended for family members. Which option is allowed, and how it is defined, depends on your jurisdiction and zoning.' },
+      { question: 'Can I build an ADU or in-law suite on my property in Tampa Bay?', answer: 'It depends on the property. Zoning district, lot size, setbacks, lot coverage, flood zone, utilities and HOA or deed restrictions all affect what can be built. We review these items for your address and confirm requirements with the applicable county or city before design is finalized.' },
+      { question: 'Should the unit be attached or detached?', answer: 'Attached in-law suites can share the home\'s structure and systems and may be simpler where the lot is tight. Detached ADUs offer more privacy but need their own foundation, utility connections and setbacks. We compare both options for your lot, budget priorities and household needs during planning.' },
+      { question: 'Do ADUs and in-law suites require permits?', answer: 'Yes. New living space requires building permits covering structural, electrical, plumbing and mechanical work, and some jurisdictions require additional zoning or land-use approval. Unique Building Contractors prepares and submits permit applications and manages every required inspection as the licensed contractor of record (CBC1268844).' },
+      { question: 'How much does an ADU or in-law suite cost?', answer: 'Cost depends on size, attached versus detached construction, site work, utility connections, finishes and permit requirements. We provide a project-specific estimate after reviewing the property and defining the scope — call (813) 523-7828 to schedule a free estimate.' },
+      { question: 'Can a garage be converted into an in-law suite?', answer: 'Often, yes. A garage conversion can create a bedroom, bathroom and living area, but it requires review of parking requirements, floor elevation, insulation, windows and egress, and the needed permits. We evaluate whether your garage is a good candidate before design begins.' },
     ],
   },
   'kitchens-bathrooms': {

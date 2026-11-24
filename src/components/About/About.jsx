@@ -104,7 +104,7 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="section-subtitle about-text"
             >
-              Unique Building Contractors (UBC) is Tampa Bay's premier custom construction and remodeling firm. With our headquarters in New Port Richey, Florida, we bring unparalleled expertise, premium materials, and dedicated project management to every single project across the Tampa Bay and Clearwater area.
+              Unique Building Contractors (UBC) is Tampa Bay's premier custom construction and remodeling firm. With our office in Clearwater, Florida (4500 140th Ave N #214), we bring unparalleled expertise, premium materials, and dedicated project management to every single project across the Tampa Bay and Clearwater area.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

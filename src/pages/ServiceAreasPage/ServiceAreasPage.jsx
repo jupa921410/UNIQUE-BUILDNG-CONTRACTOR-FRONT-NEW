@@ -5,6 +5,7 @@ import SEO, { breadcrumbSchema, SITE_URL } from '../../components/SEO/SEO';
 import { PHASE1_CITIES } from '../../data/serviceAreasData';
 import Contact from '../../components/Contact/Contact';
 import ConceptHero from '../../components/ConceptHero/ConceptHero';
+import waterfrontHome from '../../assets/hero1.png';
 import './ServiceAreasPage.css';
 
 const CITY_DESCRIPTIONS = {
@@ -12,7 +13,7 @@ const CITY_DESCRIPTIONS = {
   'carrollwood-fl':     'Open-concept transformations & custom renovations in established Carrollwood',
   'riverview-fl':       'Kitchen, bathroom & additions for growing Riverview families',
   'brandon-fl':         'Whole-home renovations in Brandon\'s established communities',
-  'clearwater-fl':      'Condo & home remodeling — waterfront & inland properties',
+  'clearwater-fl':      'Our office — condo & home remodeling, waterfront & inland',
   'st-petersburg-fl':   'Condo remodeling, historic bungalows & downtown residences',
   'dunedin-fl':         'Coastal cottage remodeling, waterfront condos & FEMA-compliant additions',
   'palm-harbor-fl':     'Full-service remodeling for Palm Harbor\'s coastal homes',
@@ -37,6 +38,7 @@ const SERVICES = [
   { id: 'kitchens-bathrooms', label: 'Bathroom Remodeling' },
   { id: 'remodeling',         label: 'Whole-Home Remodeling' },
   { id: 'additions',          label: 'Home Additions' },
+  { id: 'adu-in-law-suites',  label: 'ADUs & In-Law Suites' },
   { id: 'flooring',           label: 'Flooring' },
   { id: 'projectmanagement',  label: 'Construction Management' },
   { id: 'new-construction',   label: 'New Construction' },
@@ -70,7 +72,7 @@ export default function ServiceAreasPage() {
       />
 
       {/* ── HERO ────────────────────────────────────────────────────── */}
-      <ConceptHero title="Local knowledge. Lasting homes." label="Serving Tampa Bay, Florida" description="Construction and remodeling for the places we call home. Explore our Tampa Bay service areas and find the right approach for your neighborhood." cta="Find your neighborhood" to="/service-areas#sa-cities-heading" />
+      <ConceptHero title="Local knowledge. Lasting homes." label="Serving Tampa Bay, Florida" description="Construction and remodeling for the places we call home. Explore our Tampa Bay service areas and find the right approach for your neighborhood." image={waterfrontHome} imageAlt="Waterfront home concept surrounded by tropical landscaping" cutout={false} cta="Find your neighborhood" to="/service-areas#sa-cities-heading" />
 
       {/* ── TRUST BAR ───────────────────────────────────────────────── */}
       <section className="sa-trust-section" aria-label="Trust indicators">

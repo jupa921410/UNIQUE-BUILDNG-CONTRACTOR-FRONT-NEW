@@ -20,6 +20,7 @@ export const staticUrls = [
   { path: '/services/new-construction',           changefreq: 'monthly', priority: '0.9' },
   { path: '/services/remodeling',                 changefreq: 'monthly', priority: '0.9' },
   { path: '/services/additions',                  changefreq: 'monthly', priority: '0.8' },
+  { path: '/services/adu-in-law-suites',          changefreq: 'monthly', priority: '0.8' },
   { path: '/services/kitchens-bathrooms',         changefreq: 'monthly', priority: '0.9' },
   { path: '/services/flooring',                   changefreq: 'monthly', priority: '0.8' },
   { path: '/services/projectmanagement',          changefreq: 'monthly', priority: '0.7' },

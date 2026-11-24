@@ -30,6 +30,9 @@ We believe that a custom home should reflect the personality of its owner. That'
     id: 'remodeling',
     title: 'Remodeling',
     subtitle: 'Renovate & renew',
+    seoTitle: 'Licensed Remodeling Contractor in Clearwater & Tampa Bay',
+    h1: 'Home Remodeling Contractor in Clearwater & Tampa Bay',
+    metaDesc: 'Whole-home and interior remodeling by a Florida-licensed contractor (CBC1268844). Permits, trades and inspections handled in Clearwater and Tampa Bay.',
     desc: 'Transform your existing space with full-scale renovations. From storm damage repairs to complete interior overhauls, we bring fresh life to every room.',
     fullDesc: `Remodeling is about more than just changing a space; it's about reimagining how you live. Whether you're looking to modernize an aging property or repair damage from the elements, our remodeling services offer the perfect blend of structural integrity and aesthetic excellence. We specialize in turning outdated houses into contemporary homes that reflect today's lifestyles.
 
@@ -50,16 +53,22 @@ From high-end interior finishes and sophisticated lighting designs to complete k
     id: 'additions',
     title: 'Additions',
     subtitle: 'Expand your space',
+    seoTitle: 'Home Addition Contractors in Tampa & Clearwater, FL',
+    h1: 'Home Additions in Tampa & Clearwater, FL',
+    metaDesc: 'Licensed home addition contractor in Tampa, Clearwater and Tampa Bay: room and primary-suite additions, in-law suites, garage conversions. Permits handled.',
     desc: "Add square footage and functionality with expertly crafted home additions. New rooms, expanded living areas, and garage conversions designed to match your home's style.",
     fullDesc: `When your home no longer fits your lifestyle, you don't necessarily need to move. Our home addition services allow you to grow your living area while significantly increasing your property value. We specialize in creating expansions that feel like a natural, intentional extension of your original architecture, rather than an afterthought.
 
 Whether you need a new master suite, an expanded kitchen, a guest wing, or a functional garage conversion, we handle the entire process from foundation to roofline. We pay special attention to matching existing materials, textures, and architectural details to ensure a unified exterior appearance and a fluid interior flow.
 
-Expanding a home requires careful structural planning and a keen eye for design. Our team manages the delicate balance of integrating new systems into your existing home, ensuring that HVAC, electrical, and plumbing extensions are handled with precision. We take pride in delivering space that not only adds square footage but also enhances the overall harmony and utility of your residence.`,
-    tags: ['Room Additions', 'Garage', 'Second Story', 'Sunrooms'],
+Expanding a home requires careful structural planning and a keen eye for design. Our team manages the delicate balance of integrating new systems into your existing home, ensuring that HVAC, electrical, and plumbing extensions are handled with precision. We take pride in delivering space that not only adds square footage but also enhances the overall harmony and utility of your residence.
+
+For homeowners in Tampa, Clearwater and the surrounding Tampa Bay communities, an addition usually starts with a feasibility review: lot setbacks, zoning, flood-zone and wind-load requirements, and how the new structure will tie into the existing roof, foundation and building systems. As a Florida Certified Building Contractor (CBC1268844), we coordinate the design team, permit applications with the applicable county or city building department, and every required inspection through closeout.`,
+    tags: ['Room Additions', 'Primary Suites', 'In-Law Suites', 'Garage Conversions', 'Second Story', 'Sunrooms'],
     highlights: [
       'Multi-story home extensions',
-      'Master suite & bedroom additions',
+      'Primary suite & bedroom additions',
+      'In-law suites & multigenerational living space',
       'Garage-to-living-space conversions',
       'Sunrooms & enclosed patio areas',
       'Seamless roofline & facade matching',
@@ -70,6 +79,9 @@ Expanding a home requires careful structural planning and a keen eye for design.
     id: 'kitchens-bathrooms',
     title: 'Kitchens & Bathrooms',
     subtitle: 'Heart of the home',
+    seoTitle: 'Kitchen & Bathroom Remodeler | Clearwater & Tampa Bay',
+    h1: 'Kitchen & Bathroom Remodeling in Clearwater & Tampa Bay',
+    metaDesc: 'Licensed kitchen and bathroom remodeler in Clearwater and Tampa Bay: cabinets, countertops, tile, glass showers and vanities. Call (813) 523-7828.',
     desc: 'Premium kitchen and bathroom transformations featuring granite and dolomite countertops, custom cabinetry, spa-style bathrooms, and full layout reconfigurations. Where comfort, style, and functionality come together.',
     fullDesc: `Kitchens and bathrooms are the heart and soul of any home—the places where we start our days and gather with loved ones. We blend ergonomic design, modern layouts, and high-end materials to create environments that are both highly functional and visually stunning. Our transformations are designed to provide a daily experience of luxury and comfort.
 
@@ -88,6 +100,30 @@ For bathrooms, we create spa-like retreats that offer a sanctuary from the outsi
       'vanities',
       'fixtures'
     ]
+  },
+
+  {
+    id: 'adu-in-law-suites',
+    title: 'ADUs & In-Law Suites',
+    subtitle: 'Room for multigenerational living',
+    seoTitle: 'ADU & In-Law Suite Contractors in Tampa Bay, FL',
+    h1: 'ADU, In-Law Suite & Extended Family Residence Contractors in Tampa Bay',
+    metaDesc: 'Licensed contractor for ADUs, in-law suites and extended family residences in Tampa, Clearwater and Tampa Bay. Zoning review, permits and construction.',
+    desc: 'Accessory dwelling units (ADUs), attached in-law suites and extended family residences for Tampa, Clearwater and Tampa Bay homeowners — planned around your lot, local zoning rules and your family\'s needs.',
+    fullDesc: `More Tampa Bay families are looking for a way to keep parents, adult children or long-term guests close while giving everyone their own space. Depending on the property, that can mean an attached in-law suite with its own entrance, a converted garage, or a separate accessory dwelling unit (ADU) on the same lot. Local land development codes in the Tampa Bay area use different names for these spaces — accessory dwelling unit, guest house, accessory living space or extended family residence — and each jurisdiction sets its own rules.
+
+That is why every project begins with a feasibility review of your specific property. Before design is finalized, we look at zoning, setbacks, lot coverage, flood-zone status, utility connections and any HOA or deed restrictions, and we confirm which approvals the applicable authority — such as Hillsborough County, the City of Tampa, Pinellas County or the City of Clearwater — requires for the type of unit you want to build.
+
+From there, Unique Building Contractors manages the project as the Florida Certified Building Contractor of record (CBC1268844): coordinating plans with the architect or designer and engineers, submitting permit applications, building the foundation, structure and building systems, and scheduling every required inspection through final approval. The goal is a private, comfortable living space that fits the main home and meets Florida Building Code requirements for wind, flood and energy.`,
+    tags: ['ADUs', 'In-Law Suites', 'Extended Family Residences', 'Garage Conversions', 'Permits'],
+    highlights: [
+      'Attached in-law suite additions',
+      'Detached ADUs & guest houses',
+      'Garage-to-suite conversions',
+      'Zoning, setback & feasibility review',
+      'Permits, inspections & utility tie-ins',
+      'Accessible, single-level design options',
+    ],
   },
 
   {

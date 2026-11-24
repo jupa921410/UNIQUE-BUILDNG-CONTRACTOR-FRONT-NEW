@@ -1,7 +1,8 @@
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, CheckCircle2, ArrowRight, Phone, ChevronDown } from 'lucide-react';
+import { MapPin, CheckCircle2, ArrowRight, Phone, ChevronDown, Clock } from 'lucide-react';
+import { BUSINESS_INFO } from '../../data/businessSchema';
 import { useEffect, useState } from 'react';
 import { fetchShowcaseProjects } from '../../services/showcaseService';
 import { projectCity, projectsForArea } from '../../data/projectContent';
@@ -9,6 +10,7 @@ import SEO, { cityPageSchema } from '../../components/SEO/SEO';
 import { getCityData, getNearbyAreas } from '../../data/serviceAreasData';
 import Contact from '../../components/Contact/Contact';
 import ConceptHero from '../../components/ConceptHero/ConceptHero';
+import { cityHeroImages } from '../../data/cityHeroImages';
 import './CityPage.css';
 
 
@@ -85,7 +87,7 @@ export default function CityPage() {
   const {
     city, state, slug, seoTitle, metaDescription, h1, intro,
     localContext, featuredServices, condoFocus, condoContent,
-    testimonial, faqs, permitAuthority, localProjectsNote,
+    testimonial, faqs, permitAuthority, localProjectsNote, office,
   } = cityData;
 
   const introParagraphs = intro.split('\n\n').filter(Boolean);
@@ -113,7 +115,45 @@ export default function CityPage() {
       </nav>
 
       {/* ── HERO ────────────────────────────────────────────────── */}
-      <ConceptHero imageAlt={`Architectural concept for home remodeling in ${city}, ${state}`} title={h1} label={city + ", " + state} description={introParagraphs[0]} cta="Plan your renovation" to={`/service-areas/${slug}#cp-cta-form`} />
+      <ConceptHero {...cityHeroImages[slug]} title={h1} label={city + ", " + state} description={introParagraphs[0]} cta="Plan your renovation" to={`/service-areas/${slug}#cp-cta-form`} />
+
+      {/* ── OFFICE (headquarters city only) ─────────────────────── */}
+      {office && (
+        <section className="cp-local-section section" aria-labelledby="cp-office-heading">
+          <div className="container cp-local-grid">
+            <div>
+              <div className="section-badge">Our Office</div>
+              <h2 id="cp-office-heading" className="detail-heading">
+                Unique Building Contractors Headquarters in {city}
+              </h2>
+              <p className="cp-local-intro">
+                Our {city} office serves homeowners across Pinellas, Hillsborough and Pasco counties.
+                Call or send us a message to schedule a free estimate for your remodeling, addition
+                or new construction project.
+              </p>
+              <ul className="cp-local-list">
+                <li><MapPin size={18} className="text-green" /><span><address style={{ fontStyle: 'normal' }}>{BUSINESS_INFO.legalName}<br />{BUSINESS_INFO.streetAddress}<br />{BUSINESS_INFO.addressLocality}, {BUSINESS_INFO.addressRegion} {BUSINESS_INFO.postalCode}</address></span></li>
+                <li><Phone size={18} className="text-green" /><span><a href={BUSINESS_INFO.phoneHref}>{BUSINESS_INFO.phone}</a></span></li>
+                {BUSINESS_INFO.hours.map(({ days, time }) => (
+                  <li key={days}><Clock size={18} className="text-green" /><span>{days}: {time}</span></li>
+                ))}
+                <li><CheckCircle2 size={18} className="text-green" /><span>Florida Certified Building Contractor {BUSINESS_INFO.license}</span></li>
+              </ul>
+            </div>
+            <div className="cp-local-sidebar">
+              <div className="cp-sidebar-block glass-card">
+                <h3>Visit or Call Our {city} Office</h3>
+                <p>{BUSINESS_INFO.addressLine}</p>
+                <div className="cp-sidebar-cta">
+                  <a href={BUSINESS_INFO.mapsUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
+                    Get Directions <ArrowRight size={18} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── SERVICES IN CITY ────────────────────────────────────── */}
       <section className="cp-services-section section section-dark" aria-labelledby="cp-services-heading">

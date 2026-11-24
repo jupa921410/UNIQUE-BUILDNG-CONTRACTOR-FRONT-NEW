@@ -18,6 +18,17 @@ DirectorySlash Off
   RewriteRule ^portfolio/remodeling-project/?$ /portfolio/remodeling-project-clearwater-beach-fl [R=301,L]
   RewriteRule ^portfolio/complete-bathroom-remodeling/?$ /portfolio/complete-bathroom-remodeling-zephyrhills-fl [R=301,L]
 
+  # 0. Canonical host: send the bare domain to https://www so Google only
+  #    indexes one version of every URL (Search Console was counting both).
+  RewriteCond %{HTTP_HOST} ^uniquebuildingcontractors\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.uniquebuildingcontractors.com/$1 [R=301,L]
+
+  # 0b. http -> https. Only fires when the proxy/CDN explicitly reports plain
+  #     http, so it cannot loop behind Hostinger's CDN. Also enable "Force
+  #     HTTPS" in hPanel (http:// currently answers 500 before reaching here).
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http [NC]
+  RewriteRule ^(.*)$ https://www.uniquebuildingcontractors.com/$1 [R=301,L]
+
   # The home route is valid even before mod_dir resolves DirectoryIndex.
   RewriteRule ^$ /index.html [L]
 

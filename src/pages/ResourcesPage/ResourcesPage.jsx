@@ -26,7 +26,7 @@ export default function ResourcesPage() {
   return (
     <main className="resources-page">
       <SEO title="Construction & Remodeling Resources" description="Practical planning guidance for Tampa Bay kitchen, bathroom, flooring, addition and home remodeling projects." schema={[schema, breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Resources', path: '/resources' }])]} />
-      <ConceptHero title="Better plans. Beautiful possibilities." label="The planning library" description="Practical starting points for your next construction or renovation project. Explore the decisions that shape a home." image={materials} cutout={false} cta="Explore the guides" to="/resources#planning-guides" />
+      <ConceptHero title="Better plans. Beautiful possibilities." label="The planning library" description="Practical starting points for your next construction or renovation project. Explore the decisions that shape a home." image={materials} imageAlt="Architectural drawings and a selection of stone, wood and metal finishes" cutout={false} cta="Explore the guides" to="/resources#planning-guides" />
       <div className="container section" id="planning-guides">
         <div className="section-badge">Planning Guides</div>
         <h2 className="section-title">Construction & <span>Remodeling Resources</span></h2>

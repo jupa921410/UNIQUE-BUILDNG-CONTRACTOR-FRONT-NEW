@@ -6,6 +6,12 @@ import Contact from '../../components/Contact/Contact';
 import ProcessSteps from '../../components/ProcessSteps/ProcessSteps';
 import ConceptHero from '../../components/ConceptHero/ConceptHero';
 import villa from '../../assets/redesign/villa.png';
+import addition from '../../assets/redesign/exterior.webp';
+import remodeling from '../../assets/after_kitchen.png';
+import kitchen from '../../assets/hero2.png';
+import condo from '../../assets/hero3.png';
+import flooring from '../../assets/flooring.png';
+import management from '../../assets/management.png';
 import './ServicePage.css';
 import SEO, { breadcrumbSchema, faqSchema, serviceSchema, SITE_URL } from '../../components/SEO/SEO';
 import { confirmedServiceAreas, serviceSeoData } from '../../data/serviceSeoData';
@@ -13,11 +19,21 @@ import { PHASE1_CITIES } from '../../data/serviceAreasData';
 
 const CITY_LINKS = PHASE1_CITIES;
 
+const serviceHeroImages = {
+  'new-construction': { image: villa, imageAlt: 'Architectural concept of a custom two-story home', cutout: true },
+  additions: { image: addition, imageAlt: 'Waterfront home concept with expansive indoor and outdoor living spaces' },
+  'adu-in-law-suites': { image: addition, imageAlt: 'Home concept with added private living space for extended family' },
+  remodeling: { image: remodeling, imageAlt: 'Remodeled kitchen with white cabinetry and a bright dining area' },
+  'kitchens-bathrooms': { image: kitchen, imageAlt: 'Kitchen design with a stone island and pendant lighting' },
+  'condo-renovations': { image: condo, imageAlt: 'Bathroom design with a glass shower and double vanity' },
+  flooring: { image: flooring, imageAlt: 'Flooring installation in a bright open-plan living space' },
+  projectmanagement: { image: management, imageAlt: 'Construction professionals coordinating work with architectural plans' },
+};
+
 export default function ServicePage() {
   const { id } = useParams();
   const service = servicesData.find(s => s.id === id);
   const seo = serviceSeoData[id];
-  const floatingHero = id === 'new-construction' || id === 'additions';
 
   if (!service) {
     return (
@@ -29,19 +45,22 @@ export default function ServicePage() {
     );
   }
 
+  const pageTitle = service.seoTitle || `${service.title} in Tampa Bay, FL`;
+
   return (
     <div className="service-page">
       <SEO
-        title={`${service.title} in Tampa Bay, FL`}
-        description={service.desc}
+        title={pageTitle}
+        exactTitle={Boolean(service.seoTitle)}
+        description={service.metaDesc || service.desc}
         schema={[
           serviceSchema(service),
-          { '@context': 'https://schema.org', '@type': 'WebPage', name: `${service.title} in Tampa Bay, FL`, url: `${SITE_URL}/services/${service.id}`, about: { '@id': `${SITE_URL}/#business` } },
+          { '@context': 'https://schema.org', '@type': 'WebPage', name: service.h1 || pageTitle, url: `${SITE_URL}/services/${service.id}`, about: { '@id': `${SITE_URL}/#business` } },
           breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Services' }, { name: service.title, path: `/services/${service.id}` }]),
           faqSchema(seo.faqs),
         ]}
       />
-      <ConceptHero title={service.title} label={service.subtitle} description={service.desc} image={floatingHero ? villa : service.image} cutout={floatingHero} imageAlt={floatingHero ? 'Architectural inspiration for ' + service.title.toLowerCase() : service.title + " project in Tampa Bay, FL"} />
+      <ConceptHero title={service.h1 || service.title} label={service.subtitle} description={service.desc} {...serviceHeroImages[id]} />
 
       <section className="service-details-section section">
         <div className="container">
@@ -98,6 +117,7 @@ export default function ServicePage() {
             <p>{seo.intro}</p>
             <p>Unique Building Contractors is a Florida Certified Building Contractor (CBC1268844) serving {confirmedServiceAreas.join(', ')} and surrounding Tampa Bay communities.</p>
             <div className="service-related-links" aria-label="Related services">
+              {(seo.related || []).map(item => <Link key={item.to} to={item.to}>{item.label}</Link>)}
               <Link to="/portfolio">View related projects</Link>
               {servicesData.filter(item => item.id !== id).slice(0, 3).map(item => <Link key={item.id} to={`/services/${item.id}`}>{item.title}</Link>)}
             </div>

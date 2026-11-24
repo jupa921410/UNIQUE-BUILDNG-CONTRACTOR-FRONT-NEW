@@ -36,13 +36,15 @@ export default function SEO({
   type = 'website',
   noindex = false,
   schema,
+  exactTitle = false,
 }) {
   const collect = useContext(SeoRenderContext);
   const location = useLocation();
   const cleanPath = path ?? location.pathname;
   const description = metaDescription(pageDescriptions[cleanPath] || rawDescription);
   const canonical = `${SITE_URL}${cleanPath === '/' ? '/' : cleanPath.replace(/\/$/, '')}`;
-  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+  // exactTitle: the page supplies a complete, length-tuned <title> (no brand suffix).
+  const fullTitle = exactTitle || title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
   const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
   const previewKey = cleanPath === '/' ? 'home' : cleanPath.replace(/^\/|\/$/g, '').replace(/[^a-z0-9-]/gi, '-');
   const resolvedImage = image || `${SITE_URL}/previews/${previewKey}.jpg`;

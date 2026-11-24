@@ -71,6 +71,7 @@ We are a licensed general contractor (CBC1268844), not a sub-trade. That distinc
       { id: 'kitchens-bathrooms', label: 'Bathroom Remodeling',    desc: 'Spa-style upgrades, glass showers, tile, and vanity installations.' },
       { id: 'remodeling',         label: 'Whole-Home Remodeling',  desc: 'Comprehensive renovations managed under a single licensed contractor.' },
       { id: 'additions',          label: 'Home Additions',         desc: 'Expand your living space with permitted additions designed to match your home.' },
+      { id: 'adu-in-law-suites',  label: 'ADUs & In-Law Suites',   desc: 'In-law suites, ADUs and extended family residences reviewed against City of Tampa or Hillsborough County rules.' },
       { id: 'flooring',           label: 'Flooring',               desc: 'Hardwood, porcelain tile, LVP, and natural stone throughout Tampa homes.' },
       { id: 'projectmanagement',  label: 'Construction Management', desc: 'Professional oversight for large or complex projects from planning to delivery.' },
     ],
@@ -257,9 +258,11 @@ Unique Building Contractors serves Brandon homeowners as a licensed general cont
     slug:            'clearwater-fl',
     city:            'Clearwater',
     state:           'FL',
-    seoTitle:        'Condo & Home Remodeling Clearwater FL | Unique Building Contractors',
-    metaDescription: 'Licensed condo and home remodeling contractor in Clearwater, FL. Kitchen, bathroom, full interior renovations. COI, HOA coordination, permits. Florida Certified Building Contractor CBC1268844.',
-    h1:              'Condo & Home Remodeling Contractor in Clearwater, FL',
+    seoTitle:        'Clearwater FL General Contractor | Unique Building Contractors',
+    metaDescription: 'Our office: 4500 140th Ave N #214, Clearwater, FL 33762. Licensed contractor (CBC1268844) for home & condo remodeling and additions. Mon–Fri 8 AM–4 PM.',
+    h1:              'General Contractor in Clearwater, FL — Home & Condo Remodeling',
+    // Clearwater is the company's office (headquarters). Other city pages are service areas only.
+    office:          true,
     permitAuthority: 'Pinellas County and the City of Clearwater',
     localProjectsNote: 'Clearwater\'s remodeling market spans two distinct worlds: COI-driven condo renovations in gulf-front and waterfront towers, and traditional permitted residential projects in established inland neighborhoods. UBC manages both — coordinating building management documentation for condo work and navigating Pinellas County permitting for single-family scopes — under one professional team.',
     intro: `Clearwater's real estate landscape is defined by two distinct markets: the waterfront and beach-adjacent condominium buildings along the Gulf coast, and the established single-family neighborhoods further inland. Both housing types come with their own remodeling considerations. Condo owners face association requirements, building management coordination, certificate of insurance (COI) requirements, elevator scheduling, and work-hour restrictions. Single-family homeowners face Pinellas County permits, inspections, and the specific challenges of Florida coastal construction.
@@ -282,6 +285,7 @@ Unique Building Contractors is a Florida Certified Building Contractor (CBC12688
       { id: 'remodeling',         label: 'Interior Remodeling',       desc: 'Complete interior renovations for Clearwater condos and single-family homes.' },
       { id: 'flooring',           label: 'Flooring',                  desc: 'Porcelain tile, LVP, and natural stone — materials suited to Clearwater\'s coastal climate.' },
       { id: 'additions',          label: 'Home Additions',            desc: 'Permitted additions for Clearwater single-family homes.' },
+      { id: 'adu-in-law-suites',  label: 'ADUs & In-Law Suites',      desc: 'In-law suites, garage conversions and accessory units planned around Pinellas County and City of Clearwater rules.' },
       { id: 'projectmanagement',  label: 'Construction Management',   desc: 'Trade and schedule coordination for complex Clearwater condo or multi-scope projects.' },
     ],
     condoFocus: true,
@@ -330,6 +334,10 @@ Unique Building Contractors is a Florida Certified Building Contractor (CBC12688
       color:    '#0284c7',
     },
     faqs: [
+      {
+        question: 'Where is the Unique Building Contractors office?',
+        answer:   'Our office is at 4500 140th Ave N #214, Clearwater, FL 33762. Office hours are Monday through Friday, 8:00 AM to 4:00 PM; we are closed Saturday and Sunday. Call (813) 523-7828 to schedule a free estimate.',
+      },
       {
         question: 'Can UBC remodel a condo in Clearwater?',
         answer:   'Yes. We are experienced in condo remodeling within Clearwater\'s managed buildings. We provide COI documentation, coordinate with building management, comply with work-hour restrictions, and manage Pinellas County permits for applicable scopes.',

@@ -1,12 +1,12 @@
 export const pageDescriptions = {
-  '/': 'Licensed Tampa Bay general contractor for custom homes, kitchen and bathroom remodeling, additions and flooring. Plan your project with Unique Building Contractors.',
+  '/': 'Florida-licensed general contractor (CBC1268844) for remodeling, kitchens, bathrooms, additions and new homes in Clearwater and Tampa Bay. Free estimates.',
   '/aboutus': 'Meet the Unique Building Contractors team serving Tampa Bay, FL. Learn how we coordinate construction, remodeling, permits, finishes and project communication.',
   '/service-areas': 'Explore Tampa Bay communities served by Unique Building Contractors for kitchen, bathroom and home remodeling, condo renovations, flooring and home additions.',
   '/specialized': 'Explore specialized kitchen, bathroom and flooring renovations in Tampa Bay, FL. Plan finishes, layouts and coordinated construction with Unique Building Contractors.',
   '/resources': 'Plan your Tampa Bay renovation with guides to kitchens, bathrooms, flooring, additions, budgets and schedules from the team at Unique Building Contractors.',
   '/privacy': 'Read how Unique Building Contractors collects and uses website inquiries and messaging information, handles privacy requests and protects contact information.',
   '/terms': 'Review the terms for using the Unique Building Contractors website, including project information, written agreements and how to contact our Tampa Bay team.',
-  '/contact': 'Discuss your Tampa Bay construction or remodeling project with Unique Building Contractors. Call (813) 523-7828 to plan your scope, priorities and next steps.',
+  '/contact': 'Contact Unique Building Contractors: 4500 140th Ave N #214, Clearwater, FL 33762. Call (813) 523-7828, Mon–Fri 8 AM–4 PM, for a free estimate.',
 };
 
 export function metaDescription(value = '') {
